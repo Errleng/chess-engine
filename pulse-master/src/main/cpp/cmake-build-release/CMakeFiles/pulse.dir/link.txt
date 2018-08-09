@@ -1,0 +1,3 @@
+D:\Applications\apps\CLion\ch-0\182.3911.40\bin\cmake\win\bin\cmake.exe -E remove -f CMakeFiles\pulse.dir/objects.a
+D:\Applications\Mingw64\mingw64\bin\ar.exe cr CMakeFiles\pulse.dir/objects.a @CMakeFiles\pulse.dir\objects1.rsp
+D:\Applications\Mingw64\mingw64\bin\g++.exe -O3 -DNDEBUG  -static-libgcc -static-libstdc++ -Wl,--whole-archive CMakeFiles\pulse.dir/objects.a -Wl,--no-whole-archive  -o pulse--cpp.exe -Wl,--out-implib,libpulse--cpp.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\pulse.dir\linklibs.rsp

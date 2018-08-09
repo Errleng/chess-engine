@@ -1,0 +1,17 @@
+# Maven
+/target/
+
+# CMake
+/build/
+/cmake-build-debug/
+
+# Eclipse
+/.settings/
+/bin/
+/.classpath
+/.project
+
+# IntelliJ IDEA
+/.idea/
+/out/
+/*.iml

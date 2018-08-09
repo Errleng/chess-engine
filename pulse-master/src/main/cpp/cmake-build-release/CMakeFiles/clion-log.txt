@@ -1,0 +1,14 @@
+D:\Applications\apps\CLion\ch-0\182.3911.40\bin\cmake\win\bin\cmake.exe -DCMAKE_BUILD_TYPE=Release -G "CodeBlocks - MinGW Makefiles" D:\Documents\SourceTree\ChessEngine\pulse-master\src\main\cpp
+CMake Warning (dev) in CMakeLists.txt:
+  No cmake_minimum_required command is present.  A line of code such as
+
+    cmake_minimum_required(VERSION 3.12)
+
+  should be added at the top of the file.  The version specified may be lower
+  if you wish to support older CMake versions for this project.  For more
+  information run "cmake --help-policy CMP0000".
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- Configuring done
+-- Generating done
+-- Build files have been written to: D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/cmake-build-release

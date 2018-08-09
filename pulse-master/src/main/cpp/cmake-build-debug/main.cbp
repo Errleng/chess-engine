@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="main"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="D:/Applications/Mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="D:/Applications/Mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/Applications/Mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/Applications/Mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="list_install_components">
+				<Option working_dir="D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="D:/Applications/Mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 list_install_components"/>
+					<CompileFile command="D:/Applications/Mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/Applications/Mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/Applications/Mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="pulse">
+				<Option output="D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/cmake-build-debug/pulse--cpp.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir=""/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="D:/Applications/Mingw64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++"/>
+					<Add directory="D:/Applications/Mingw64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32"/>
+					<Add directory="D:/Applications/Mingw64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward"/>
+					<Add directory="D:/Applications/Mingw64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include"/>
+					<Add directory="D:/Applications/Mingw64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed"/>
+					<Add directory="D:/Applications/Mingw64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="D:/Applications/Mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 pulse"/>
+					<CompileFile command="D:/Applications/Mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/Applications/Mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/Applications/Mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="pulse/fast">
+				<Option output="D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/cmake-build-debug/pulse--cpp.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir=""/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="D:/Applications/Mingw64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++"/>
+					<Add directory="D:/Applications/Mingw64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32"/>
+					<Add directory="D:/Applications/Mingw64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward"/>
+					<Add directory="D:/Applications/Mingw64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include"/>
+					<Add directory="D:/Applications/Mingw64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed"/>
+					<Add directory="D:/Applications/Mingw64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="D:/Applications/Mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 pulse/fast"/>
+					<CompileFile command="D:/Applications/Mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/Applications/Mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/Applications/Mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="core">
+				<Option output="D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/cmake-build-debug/libcore.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="D:/Applications/Mingw64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++"/>
+					<Add directory="D:/Applications/Mingw64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32"/>
+					<Add directory="D:/Applications/Mingw64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward"/>
+					<Add directory="D:/Applications/Mingw64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include"/>
+					<Add directory="D:/Applications/Mingw64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed"/>
+					<Add directory="D:/Applications/Mingw64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="D:/Applications/Mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 core"/>
+					<CompileFile command="D:/Applications/Mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/Applications/Mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/Applications/Mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="core/fast">
+				<Option output="D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/cmake-build-debug/libcore.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="D:/Applications/Mingw64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++"/>
+					<Add directory="D:/Applications/Mingw64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32"/>
+					<Add directory="D:/Applications/Mingw64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward"/>
+					<Add directory="D:/Applications/Mingw64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include"/>
+					<Add directory="D:/Applications/Mingw64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed"/>
+					<Add directory="D:/Applications/Mingw64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="D:/Applications/Mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 core/fast"/>
+					<CompileFile command="D:/Applications/Mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/Applications/Mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/Applications/Mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install/local">
+				<Option working_dir="D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="D:/Applications/Mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 install/local"/>
+					<CompileFile command="D:/Applications/Mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/Applications/Mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/Applications/Mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install">
+				<Option working_dir="D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="D:/Applications/Mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 install"/>
+					<CompileFile command="D:/Applications/Mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/Applications/Mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/Applications/Mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="D:/Applications/Mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="D:/Applications/Mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/Applications/Mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/Applications/Mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="D:/Applications/Mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="D:/Applications/Mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/Applications/Mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/Applications/Mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install/strip">
+				<Option working_dir="D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="D:/Applications/Mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 install/strip"/>
+					<CompileFile command="D:/Applications/Mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/Applications/Mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/Applications/Mingw64/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/bitboard.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/bitboard.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/castling.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/castling.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/castlingtype.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/castlingtype.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/color.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/color.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/evaluation.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/evaluation.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/file.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/file.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/main.cpp">
+			<Option target="pulse"/>
+		</Unit>
+		<Unit filename="D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/move.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/move.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/movegenerator.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/movegenerator.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/movelist.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/movelist.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/movetype.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/movetype.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/notation.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/notation.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/perft.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/perft.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/piece.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/piece.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/piecetype.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/piecetype.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/position.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/position.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/pulse.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/pulse.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/rank.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/rank.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/search.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/search.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/square.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/square.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/value.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/value.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
