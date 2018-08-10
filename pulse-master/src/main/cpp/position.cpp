@@ -234,20 +234,16 @@ namespace pulse {
 
         statesSize++;
 
-        // Remove enpassant if set.
         if (enPassantSquare != Square::NOSQUARE) {
             zobristKey ^= zobrist.enPassantSquare[enPassantSquare];
             enPassantSquare = Square::NOSQUARE;
         }
 
-        // Change side to move.
         activeColor = Color::opposite(activeColor);
         zobristKey ^= zobrist.activeColor;
 
-        // Update halfmoveClock
         halfmoveClock++;
 
-        // Update full_move_number
         halfmoveNumber++;
     }
 

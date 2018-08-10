@@ -482,6 +482,21 @@ square.s:
 .PHONY : square.s
 
 # target to build an object file
+transposition.obj:
+	$(MAKE) -f CMakeFiles\core.dir\build.make CMakeFiles/core.dir/transposition.obj
+.PHONY : transposition.obj
+
+# target to preprocess a source file
+transposition.i:
+	$(MAKE) -f CMakeFiles\core.dir\build.make CMakeFiles/core.dir/transposition.i
+.PHONY : transposition.i
+
+# target to generate assembly for a file
+transposition.s:
+	$(MAKE) -f CMakeFiles\core.dir\build.make CMakeFiles/core.dir/transposition.s
+.PHONY : transposition.s
+
+# target to build an object file
 value.obj:
 	$(MAKE) -f CMakeFiles\core.dir\build.make CMakeFiles/core.dir/value.obj
 .PHONY : value.obj
@@ -570,6 +585,9 @@ help:
 	@echo ... square.obj
 	@echo ... square.i
 	@echo ... square.s
+	@echo ... transposition.obj
+	@echo ... transposition.i
+	@echo ... transposition.s
 	@echo ... value.obj
 	@echo ... value.i
 	@echo ... value.s

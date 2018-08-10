@@ -134,6 +134,7 @@ CMakeFiles/core.dir/pulse.obj: ../pulse.cpp
 CMakeFiles/core.dir/pulse.obj: ../pulse.h
 CMakeFiles/core.dir/pulse.obj: ../search.h
 CMakeFiles/core.dir/pulse.obj: ../square.h
+CMakeFiles/core.dir/pulse.obj: ../transposition.h
 CMakeFiles/core.dir/pulse.obj: ../value.h
 
 CMakeFiles/core.dir/rank.obj: ../rank.cpp
@@ -155,10 +156,22 @@ CMakeFiles/core.dir/search.obj: ../protocol.h
 CMakeFiles/core.dir/search.obj: ../search.cpp
 CMakeFiles/core.dir/search.obj: ../search.h
 CMakeFiles/core.dir/search.obj: ../square.h
+CMakeFiles/core.dir/search.obj: ../transposition.h
 CMakeFiles/core.dir/search.obj: ../value.h
 
 CMakeFiles/core.dir/square.obj: ../square.cpp
 CMakeFiles/core.dir/square.obj: ../square.h
+
+CMakeFiles/core.dir/transposition.obj: ../bitboard.h
+CMakeFiles/core.dir/transposition.obj: ../castling.h
+CMakeFiles/core.dir/transposition.obj: ../color.h
+CMakeFiles/core.dir/transposition.obj: ../depth.h
+CMakeFiles/core.dir/transposition.obj: ../piece.h
+CMakeFiles/core.dir/transposition.obj: ../piecetype.h
+CMakeFiles/core.dir/transposition.obj: ../position.h
+CMakeFiles/core.dir/transposition.obj: ../square.h
+CMakeFiles/core.dir/transposition.obj: ../transposition.cpp
+CMakeFiles/core.dir/transposition.obj: ../transposition.h
 
 CMakeFiles/core.dir/value.obj: ../depth.h
 CMakeFiles/core.dir/value.obj: ../value.cpp

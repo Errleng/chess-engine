@@ -9,19 +9,19 @@
 
 namespace pulse {
 
-const std::array<int, Color::VALUES_SIZE> Color::values = {
-		WHITE, BLACK
-};
+    const std::array<int, Color::VALUES_SIZE> Color::values = {
+            WHITE, BLACK
+    };
 
-int Color::opposite(int color) {
-	switch (color) {
-		case WHITE:
-			return BLACK;
-		case BLACK:
-			return WHITE;
-		default:
-			throw std::exception();
-	}
-}
+    int Color::opposite(int color) {
+        switch (color) {
+            case WHITE:
+                return BLACK;
+            case BLACK:
+                return WHITE;
+            default:
+                throw std::exception();
+        }
+    }
 
 }

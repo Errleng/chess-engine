@@ -21,7 +21,7 @@ add_library(core STATIC
         search.cpp
         square.cpp
         value.cpp
-        )
+        transposition.cpp transposition.h)
 
 add_executable(pulse main.cpp)
 set(CMAKE_EXE_LINKER_FLAGS  "-static-libgcc -static-libstdc++")

@@ -361,7 +361,7 @@ namespace pulse {
             protocol.sendStatus(false, currentDepth, currentMaxDepth, totalNodes, currentMove, currentMoveNumber);
 
             position.makeMove(move);
-            int value = -search(depth - 1, -beta, -alpha, ply + 1);
+            int value = -search(depth - 1, -beta, -alpha, ply + 1, true);
             position.undoMove(move);
 
             if (abort) {
@@ -371,7 +371,11 @@ namespace pulse {
             // Do we have a better value?
             if (value > alpha) {
                 alpha = value;
-
+                if (value > beta) {
+                    globalTT.save(position.zobristKey, depth, beta, TT_BETA);
+                } else {
+                    globalTT.save(position.zobristKey, depth, alpha, TT_ALPHA);
+                }
                 // We found a new best move
                 rootMoves.entries[i]->value = value;
                 savePV(move, pv[ply + 1], rootMoves.entries[i]->pv);
@@ -387,7 +391,7 @@ namespace pulse {
         }
     }
 
-    int Search::search(int depth, int alpha, int beta, int ply) {
+    int Search::search(int depth, int alpha, int beta, int ply, bool doNullMove) {
         // We are at a leaf/horizon. So calculate that value.
         if (depth <= 0) {
             // Descend into quiescent
@@ -406,10 +410,9 @@ namespace pulse {
             return Value::DRAW;
         }
 
-
-
         // Initialize
         int bestValue = -Value::INFINITE;
+        uint8_t tt_flag = TT_ALPHA;
         int searchedMoves = 0;
         bool isCheck = position.isCheck();
 
@@ -418,8 +421,17 @@ namespace pulse {
             depth += 1;
         }
 
+        int probeVal = -Value::INFINITE;
+        if ((probeVal = globalTT.probe(position.zobristKey, depth, alpha, beta)) != Transposition::INVALID) {
+            if (abs(probeVal) > Value::INFINITE - 100) {
+                if (probeVal > 0) probeVal -= ply;
+                else probeVal += ply;
+            }
+            return probeVal;
+        }
+
         // NULL MOVE PRUNING
-        if (!isCheck && (
+        if (doNullMove && !isCheck && (
                 position.pieces[position.activeColor][PieceType::QUEEN] ||
                 position.pieces[position.activeColor][PieceType::ROOK] ||
                 position.pieces[position.activeColor][PieceType::BISHOP] ||
@@ -428,7 +440,7 @@ namespace pulse {
             position.makeNullMove();
 
             // We do recursive null move, with depth reduction factor 3.
-            int value = -search(depth - 3, -beta, -alpha, ply + 1);
+            int value = -search(depth - 3, -beta, -alpha, ply + 1, false);
 
             position.undoNullMove();
 
@@ -454,7 +466,7 @@ namespace pulse {
             position.makeMove(move);
             if (!position.isCheck(Color::opposite(position.activeColor))) {
                 searchedMoves++;
-                value = -search(depth - 1, -beta, -alpha, ply + 1);
+                value = -search(depth - 1, -beta, -alpha, ply + 1, true);
             }
             position.undoMove(move);
 
@@ -468,14 +480,16 @@ namespace pulse {
 
                 // Do we have a better value?
                 if (value > alpha) {
-                    alpha = value;
                     savePV(move, pv[ply + 1], pv[ply]);
 
                     // Is the value higher than beta?
                     if (value >= beta) {
                         // Cut-off
+                        tt_flag = TT_BETA;
                         break;
                     }
+                    tt_flag = TT_EXACT;
+                    alpha = value;
                 }
             }
         }
@@ -490,6 +504,8 @@ namespace pulse {
                 return Value::DRAW;
             }
         }
+
+        globalTT.save(position.zobristKey, depth, bestValue, tt_flag);
 
         return bestValue;
     }

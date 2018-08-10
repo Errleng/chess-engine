@@ -23,6 +23,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/rank.cpp" "D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/cmake-build-debug/CMakeFiles/core.dir/rank.obj"
   "D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/search.cpp" "D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/cmake-build-debug/CMakeFiles/core.dir/search.obj"
   "D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/square.cpp" "D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/cmake-build-debug/CMakeFiles/core.dir/square.obj"
+  "D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/transposition.cpp" "D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/cmake-build-debug/CMakeFiles/core.dir/transposition.obj"
   "D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/value.cpp" "D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/cmake-build-debug/CMakeFiles/core.dir/value.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")

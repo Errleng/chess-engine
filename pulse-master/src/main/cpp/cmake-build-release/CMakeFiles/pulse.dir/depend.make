@@ -20,5 +20,6 @@ CMakeFiles/pulse.dir/main.obj: ../protocol.h
 CMakeFiles/pulse.dir/main.obj: ../pulse.h
 CMakeFiles/pulse.dir/main.obj: ../search.h
 CMakeFiles/pulse.dir/main.obj: ../square.h
+CMakeFiles/pulse.dir/main.obj: ../transposition.h
 CMakeFiles/pulse.dir/main.obj: ../value.h
 

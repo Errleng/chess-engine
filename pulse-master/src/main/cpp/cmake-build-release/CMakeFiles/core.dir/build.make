@@ -316,6 +316,19 @@ CMakeFiles/core.dir/value.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/core.dir/value.s"
 	D:\Applications\Mingw64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\Documents\SourceTree\ChessEngine\pulse-master\src\main\cpp\value.cpp -o CMakeFiles\core.dir\value.s
 
+CMakeFiles/core.dir/transposition.obj: CMakeFiles/core.dir/flags.make
+CMakeFiles/core.dir/transposition.obj: ../transposition.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\Documents\SourceTree\ChessEngine\pulse-master\src\main\cpp\cmake-build-release\CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object CMakeFiles/core.dir/transposition.obj"
+	D:\Applications\Mingw64\mingw64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\core.dir\transposition.obj -c D:\Documents\SourceTree\ChessEngine\pulse-master\src\main\cpp\transposition.cpp
+
+CMakeFiles/core.dir/transposition.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/core.dir/transposition.i"
+	D:\Applications\Mingw64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\Documents\SourceTree\ChessEngine\pulse-master\src\main\cpp\transposition.cpp > CMakeFiles\core.dir\transposition.i
+
+CMakeFiles/core.dir/transposition.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/core.dir/transposition.s"
+	D:\Applications\Mingw64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\Documents\SourceTree\ChessEngine\pulse-master\src\main\cpp\transposition.cpp -o CMakeFiles\core.dir\transposition.s
+
 # Object files for target core
 core_OBJECTS = \
 "CMakeFiles/core.dir/bitboard.obj" \
@@ -337,7 +350,8 @@ core_OBJECTS = \
 "CMakeFiles/core.dir/rank.obj" \
 "CMakeFiles/core.dir/search.obj" \
 "CMakeFiles/core.dir/square.obj" \
-"CMakeFiles/core.dir/value.obj"
+"CMakeFiles/core.dir/value.obj" \
+"CMakeFiles/core.dir/transposition.obj"
 
 # External object files for target core
 core_EXTERNAL_OBJECTS =
@@ -362,9 +376,10 @@ libcore.a: CMakeFiles/core.dir/rank.obj
 libcore.a: CMakeFiles/core.dir/search.obj
 libcore.a: CMakeFiles/core.dir/square.obj
 libcore.a: CMakeFiles/core.dir/value.obj
+libcore.a: CMakeFiles/core.dir/transposition.obj
 libcore.a: CMakeFiles/core.dir/build.make
 libcore.a: CMakeFiles/core.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=D:\Documents\SourceTree\ChessEngine\pulse-master\src\main\cpp\cmake-build-release\CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Linking CXX static library libcore.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=D:\Documents\SourceTree\ChessEngine\pulse-master\src\main\cpp\cmake-build-release\CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Linking CXX static library libcore.a"
 	$(CMAKE_COMMAND) -P CMakeFiles\core.dir\cmake_clean_target.cmake
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\core.dir\link.txt --verbose=$(VERBOSE)
 

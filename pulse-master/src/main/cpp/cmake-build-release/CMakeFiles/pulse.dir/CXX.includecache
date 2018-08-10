@@ -117,6 +117,8 @@ movegenerator.h
 D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/movegenerator.h
 evaluation.h
 D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/evaluation.h
+transposition.h
+D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/transposition.h
 memory
 -
 chrono
@@ -133,6 +135,12 @@ array
 -
 vector
 -
+
+D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/transposition.h
+iostream
+-
+position.h
+D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/position.h
 
 D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/value.h
 depth.h

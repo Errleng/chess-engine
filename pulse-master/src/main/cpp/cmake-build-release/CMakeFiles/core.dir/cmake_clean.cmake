@@ -19,6 +19,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/core.dir/search.obj"
   "CMakeFiles/core.dir/square.obj"
   "CMakeFiles/core.dir/value.obj"
+  "CMakeFiles/core.dir/transposition.obj"
   "libcore.pdb"
   "libcore.a"
 )

@@ -279,6 +279,12 @@
 		<Unit filename="D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/square.h">
 			<Option target="core"/>
 		</Unit>
+		<Unit filename="D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/transposition.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/transposition.h">
+			<Option target="core"/>
+		</Unit>
 		<Unit filename="D:/Documents/SourceTree/ChessEngine/pulse-master/src/main/cpp/value.cpp">
 			<Option target="core"/>
 		</Unit>
