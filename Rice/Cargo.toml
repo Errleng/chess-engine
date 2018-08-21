@@ -1,0 +1,8 @@
+[package]
+name = "Rice"
+version = "0.1.0"
+authors = ["ELEVATE <dullbland@gmail.com>"]
+
+[dependencies]
+rand = "0.5"
+num-traits = "0.2"
