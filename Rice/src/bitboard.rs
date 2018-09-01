@@ -13,13 +13,13 @@ impl<'a> BitBoard<'a> {
             util: util,
         }
     }
-    
+
     pub fn print(&self) {
         let shift = 1u64;
         let mut sq;
         let mut sq64;
-        for rank in (board::Rank::Rank1..=board::Rank::Rank8).rev() {
-            for file in board::File::FileA..=board::File::FileH {
+        for rank in (board::Rank::RANK_1..=board::Rank::RANK_8).rev() {
+            for file in board::File::FILE_B..=board::File::FILE_H {
                 sq = self.util.fr_to_sq(file, rank);
                 sq64 = self.util.sq120_to_sq64[sq];
                 if (shift << sq64) & self.val != 0 {
@@ -55,8 +55,8 @@ impl<'a> BitBoard<'a> {
         let fold = ((b & 0xffffffff) ^ (b >> 32)) as u32;
         self.val &= self.val - 1;
 
-//        println!("Fold res: {}", ((b & 0xffffffff) ^ (b >> 32)));
-//        println!("Fold: {}, Fold (wrapped): {}", fold, fold.wrapping_mul(0x783a9b23) >> 26);
+        //        println!("Fold res: {}", ((b & 0xffffffff) ^ (b >> 32)));
+        //        println!("Fold: {}, Fold (wrapped): {}", fold, fold.wrapping_mul(0x783a9b23) >> 26);
 
         self.util.bit_table[(fold.wrapping_mul(0x783a9b23) >> 26)]
     }

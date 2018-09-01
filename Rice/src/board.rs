@@ -1,5 +1,6 @@
 use position;
 use rand;
+use types::FlattenedIdxVec;
 use types::IdxVec;
 
 pub const NUM_SQUARES: usize = 64;
@@ -8,13 +9,13 @@ pub const MAX_MOVES: usize = 2048;
 pub const MAX_POS_MOVES: usize = 256;
 
 pub mod Side {
-    pub const White: u8 = 0;
-    pub const Black: u8 = 1;
-    pub const Both: u8 = 2;
+    pub const WHITE: u8 = 0;
+    pub const BLACK: u8 = 1;
+    pub const BOTH: u8 = 2;
 }
 
 pub mod Piece {
-    pub const Empty: u8 = 0;
+    pub const EMPTY: u8 = 0;
     pub const WP: u8 = 1;
     pub const WN: u8 = 2;
     pub const WB: u8 = 3;
@@ -30,26 +31,26 @@ pub mod Piece {
 }
 
 pub mod Rank {
-    pub const Rank1: u8 = 0;
-    pub const Rank2: u8 = 1;
-    pub const Rank3: u8 = 2;
-    pub const Rank4: u8 = 3;
-    pub const Rank5: u8 = 4;
-    pub const Rank6: u8 = 5;
-    pub const Rank7: u8 = 6;
-    pub const Rank8: u8 = 7;
+    pub const RANK_1: u8 = 0;
+    pub const RANK_2: u8 = 1;
+    pub const RANK_3: u8 = 2;
+    pub const RANK_4: u8 = 3;
+    pub const RANK_5: u8 = 4;
+    pub const RANK_6: u8 = 5;
+    pub const RANK_7: u8 = 6;
+    pub const RANK_8: u8 = 7;
     pub const None: u8 = 8;
 }
 
 pub mod File {
-    pub const FileA: u8 = 0;
-    pub const FileB: u8 = 1;
-    pub const FileC: u8 = 2;
-    pub const FileD: u8 = 3;
-    pub const FileE: u8 = 4;
-    pub const FileF: u8 = 5;
-    pub const FileG: u8 = 6;
-    pub const FileH: u8 = 7;
+    pub const FILE_A: u8 = 0;
+    pub const FILE_B: u8 = 1;
+    pub const FILE_C: u8 = 2;
+    pub const FILE_D: u8 = 3;
+    pub const FILE_E: u8 = 4;
+    pub const FILE_F: u8 = 5;
+    pub const FILE_G: u8 = 6;
+    pub const FILE_H: u8 = 7;
     pub const None: u8 = 8;
 }
 
@@ -118,8 +119,8 @@ pub mod Square {
     pub const F8: u8 = 96;
     pub const G8: u8 = 97;
     pub const H8: u8 = 98;
-    pub const None: u8 = 99;
-    pub const OffBoard: u8 = 100;
+    pub const NONE: u8 = 99;
+    pub const OFFBOARD: u8 = 100;
 }
 
 pub mod Castling {
@@ -282,7 +283,7 @@ pub struct Util {
     // bitmasks
     pub set_masks: IdxVec<u64>,
     pub clear_masks: IdxVec<u64>,
-    pub piece_keys: IdxVec<IdxVec<u64>>,
+    pub piece_keys: FlattenedIdxVec<u64>,
 
     // hashkeys
     pub side_key: u64,
@@ -311,23 +312,32 @@ pub struct Util {
     pub is_rook_queen: IdxVec<bool>,
     pub is_bishop_queen: IdxVec<bool>,
 
-    // attack directions
-    pub knight_dir: IdxVec<i8>,
-    pub bishop_dir: IdxVec<i8>,
-    pub rook_dir: IdxVec<i8>,
-    pub king_dir: IdxVec<i8>,
+    // piece directions
+    pub piece_dir: FlattenedIdxVec<i8>,
+    pub num_dir: IdxVec<u8>,
+    // pub knight_dir: IdxVec<i8>,
+    // pub bishop_dir: IdxVec<i8>,
+    // pub rook_dir: IdxVec<i8>,
+    // pub king_queen_dir: IdxVec<i8>,
 
     // promotions
     pub white_promotions: IdxVec<u8>,
     pub black_promotions: IdxVec<u8>,
+
+    // sliding attack or not
+    pub is_sliding_piece: IdxVec<bool>,
+    pub sliding: IdxVec<u8>,
+
+    // castling permission
+    pub castling_perm: IdxVec<u8>, // Rook, King movements for from_sq
 }
 
 impl Util {
     pub fn is_square_valid(&self, sq: u8) -> bool {
-        self.files[sq] != Square::OffBoard
+        self.files[sq] != Square::OFFBOARD
     }
     pub fn is_side_valid(&self, side: u8) -> bool {
-        side == Side::White || side == Side::Black
+        side == Side::WHITE || side == Side::BLACK
     }
     pub fn is_fr_valid(&self, fr: u8) -> bool {
         fr >= 0 && fr <= 7
@@ -338,7 +348,15 @@ impl Util {
     pub fn is_piece_valid(&self, pce: u8) -> bool {
         pce >= Piece::WP && pce <= Piece::BK
     }
-
+    pub fn sq_to_string(&self, sq: u8) -> String {
+        let file = self.files[sq];
+        let rank = self.ranks[sq];
+        format!(
+            "{}{}",
+            (file + 'a' as u8) as char,
+            (rank + '1' as u8) as char
+        )
+    }
     pub fn fr_to_sq(&self, file: u8, rank: u8) -> u8 {
         ((21 + file) + (rank * 10))
     }
@@ -353,8 +371,8 @@ impl Util {
     fn init_sq_conv(&mut self) {
         let mut sq;
         let mut sq64 = 0;
-        for rank in Rank::Rank1..=Rank::Rank8 {
-            for file in File::FileA..=File::FileH {
+        for rank in Rank::RANK_1..=Rank::RANK_8 {
+            for file in File::FILE_A..=File::FILE_H {
                 sq = self.fr_to_sq(file, rank);
                 self.sq64_to_sq120[sq64] = sq;
                 self.sq120_to_sq64[sq] = sq64;
@@ -366,7 +384,7 @@ impl Util {
     fn init_bitmasks(&mut self) {
         for i in 0..NUM_SQUARES {
             self.set_masks[i] |= 1u64 << i;
-            self.clear_masks[i] = !self.set_masks[i];// ! = bitwise OR logical complement
+            self.clear_masks[i] = !self.set_masks[i]; // ! = bitwise OR logical complement
         }
     }
 
@@ -377,15 +395,15 @@ impl Util {
         }
         for i in 0..13 {
             for j in 0..REPR_NUM_SQUARES {
-                self.piece_keys[i][j] = rand::random::<u64>();
+                self.piece_keys[(i, j)] = rand::random::<u64>();
             }
         }
     }
 
     fn init_files_ranks(&mut self) {
         let mut sq;
-        for rank in Rank::Rank1..=Rank::Rank8 {
-            for file in File::FileA..=File::FileH {
+        for rank in Rank::RANK_1..=Rank::RANK_8 {
+            for file in File::FILE_A..=File::FILE_H {
                 sq = self.fr_to_sq(file, rank);
                 self.ranks[sq] = rank;
                 self.files[sq] = file;
@@ -399,19 +417,19 @@ impl Util {
 
         for sq in 0..REPR_NUM_SQUARES {
             piece = pos.pieces[sq];
-            if piece != Square::None && piece != Square::OffBoard && piece != Piece::Empty {
+            if piece != Square::NONE && piece != Square::OFFBOARD && piece != Piece::EMPTY {
                 debug_assert!(piece >= Piece::WP && piece <= Piece::BK);
-                key ^= self.piece_keys[piece][sq];
+                key ^= self.piece_keys[(piece, sq)];
             }
         }
 
-        if pos.side == Side::White {
+        if pos.side == Side::WHITE {
             key ^= self.side_key;
         }
 
-        if pos.enpassant != Square::None {
+        if pos.enpassant != Square::NONE {
             debug_assert!(pos.enpassant >= 0 && pos.enpassant < REPR_NUM_SQUARES as u8);
-            key ^= self.piece_keys[Piece::Empty][pos.enpassant];
+            key ^= self.piece_keys[(Piece::EMPTY, pos.enpassant)];
         }
 
         debug_assert!(pos.castling >= 0 && pos.castling <= 15);
@@ -426,38 +444,112 @@ impl Default for Util {
             sq64_to_sq120: IdxVec(vec![120; NUM_SQUARES]),
             sq120_to_sq64: IdxVec(vec![65; REPR_NUM_SQUARES]),
             bit_table: IdxVec(vec![
-                63, 30, 3, 32, 25, 41, 22, 33, 15, 50, 42, 13, 11, 53, 19, 34, 61, 29, 2,
-                51, 21, 43, 45, 10, 18, 47, 1, 54, 9, 57, 0, 35, 62, 31, 40, 4, 49, 5, 52,
-                26, 60, 6, 23, 44, 46, 27, 56, 16, 7, 39, 48, 24, 59, 14, 12, 55, 38, 28,
-                58, 20, 37, 17, 36, 8
+                63, 30, 3, 32, 25, 41, 22, 33, 15, 50, 42, 13, 11, 53, 19, 34, 61, 29, 2, 51, 21,
+                43, 45, 10, 18, 47, 1, 54, 9, 57, 0, 35, 62, 31, 40, 4, 49, 5, 52, 26, 60, 6, 23,
+                44, 46, 27, 56, 16, 7, 39, 48, 24, 59, 14, 12, 55, 38, 28, 58, 20, 37, 17, 36, 8,
             ]),
             set_masks: IdxVec(vec![0; NUM_SQUARES]),
             clear_masks: IdxVec(vec![0; NUM_SQUARES]),
-            piece_keys: IdxVec(vec![IdxVec(vec![0; REPR_NUM_SQUARES]); 13]),
+            piece_keys: FlattenedIdxVec {
+                row: REPR_NUM_SQUARES,
+                col: 13,
+                cont: vec![0; REPR_NUM_SQUARES * 13],
+            },
             side_key: 0,
             castle_keys: IdxVec(vec![0; 16]),
-            piece_chars: IdxVec(vec!['.', 'P', 'N', 'B', 'R', 'Q', 'K', 'p', 'n', 'b', 'r', 'q', 'k']),
+            piece_chars: IdxVec(vec![
+                '.', 'P', 'N', 'B', 'R', 'Q', 'K', 'p', 'n', 'b', 'r', 'q', 'k',
+            ]),
             side_chars: IdxVec(vec!['w', 'b', '-']),
             rank_chars: IdxVec(vec!['1', '2', '3', '4', '5', '6', '7', '8']),
             file_chars: IdxVec(vec!['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']),
-            is_big_piece: IdxVec(vec![false, false, true, true, true, true, true, false, true, true, true, true, true]),
-            is_major_piece: IdxVec(vec![false, false, false, false, true, true, true, false, false, false, true, true, true]),
-            is_minor_piece: IdxVec(vec![false, false, true, true, false, false, false, false, true, true, false, false, false]),
-            piece_values: IdxVec(vec![0, 100, 325, 325, 550, 1000, 50000, 100, 325, 325, 550, 1000, 50000]),
-            piece_colours: IdxVec(vec![Side::Both, Side::White, Side::White, Side::White, Side::White, Side::White, Side::White, Side::Black, Side::Black, Side::Black, Side::Black, Side::Black, Side::Black]),
-            ranks: IdxVec(vec![Square::OffBoard; REPR_NUM_SQUARES]),
-            files: IdxVec(vec![Square::OffBoard; REPR_NUM_SQUARES]),
-            is_knight: IdxVec(vec![false, false, true, false, false, false, false, false, true, false, false, false, false]),
-            is_king: IdxVec(vec![false, false, false, false, false, false, true, false, false, false, false, false, true]),
-            is_rook_queen: IdxVec(vec![false, false, false, false, true, true, false, false, false, false, true, true, false]),
-            is_bishop_queen: IdxVec(vec![false, false, false, true, false, true, false, false, false, true, false, true, false]),
-            knight_dir: IdxVec(vec![-8, -19, -21, -12, 8, 19, 21, 12]),
-            bishop_dir: IdxVec(vec![-1, -10, 1, 10]),
-            rook_dir: IdxVec(vec![-9, -11, 11, 9]),
-            king_dir: IdxVec(vec![-1, -10, 1, 10, -9, -11, 11, 9]),
+            is_big_piece: IdxVec(vec![
+                false, false, true, true, true, true, true, false, true, true, true, true, true,
+            ]),
+            is_major_piece: IdxVec(vec![
+                false, false, false, false, true, true, true, false, false, false, true, true, true,
+            ]),
+            is_minor_piece: IdxVec(vec![
+                false, false, true, true, false, false, false, false, true, true, false, false,
+                false,
+            ]),
+            piece_values: IdxVec(vec![
+                0, 100, 325, 325, 550, 1000, 50000, 100, 325, 325, 550, 1000, 50000,
+            ]),
+            piece_colours: IdxVec(vec![
+                Side::BOTH,
+                Side::WHITE,
+                Side::WHITE,
+                Side::WHITE,
+                Side::WHITE,
+                Side::WHITE,
+                Side::WHITE,
+                Side::BLACK,
+                Side::BLACK,
+                Side::BLACK,
+                Side::BLACK,
+                Side::BLACK,
+                Side::BLACK,
+            ]),
+            ranks: IdxVec(vec![Square::OFFBOARD; REPR_NUM_SQUARES]),
+            files: IdxVec(vec![Square::OFFBOARD; REPR_NUM_SQUARES]),
+            is_knight: IdxVec(vec![
+                false, false, true, false, false, false, false, false, true, false, false, false,
+                false,
+            ]),
+            is_king: IdxVec(vec![
+                false, false, false, false, false, false, true, false, false, false, false, false,
+                true,
+            ]),
+            is_rook_queen: IdxVec(vec![
+                false, false, false, false, true, true, false, false, false, false, true, true,
+                false,
+            ]),
+            is_bishop_queen: IdxVec(vec![
+                false, false, false, true, false, true, false, false, false, true, false, true,
+                false,
+            ]),
+            piece_dir: FlattenedIdxVec {
+                row: 13,
+                col: 8,
+                cont: vec![
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -8, -19, -21, -12, 8, 19, 21,
+                    12, -9, -11, 11, 9, 0, 0, 0, 0, -1, -10, 1, 10, 0, 0, 0, 0, -1, -10, 1, 10, -9,
+                    -11, 11, 9, -1, -10, 1, 10, -9, -11, 11, 9, 0, 0, 0, 0, 0, 0, 0, 0, -8, -19,
+                    -21, -12, 8, 19, 21, 12, -9, -11, 11, 9, 0, 0, 0, 0, -1, -10, 1, 10, 0, 0, 0,
+                    0, -1, -10, 1, 10, -9, -11, 11, 9, -1, -10, 1, 10, -9, -11, 11, 9,
+                ],
+            },
+            // knight_dir: IdxVec(vec![-8, -19, -21, -12, 8, 19, 21, 12]),
+            // bishop_dir: IdxVec(vec![-9, -11, 11, 9]),
+            // rook_dir: IdxVec(vec![-1, -10, 1, 10]),
+            // king_queen_dir: IdxVec(vec![-1, -10, 1, 10, -9, -11, 11, 9]),
+            num_dir: IdxVec(vec![0, 0, 8, 4, 4, 8, 8, 0, 8, 4, 4, 8, 8]),
             white_promotions: IdxVec(vec![Piece::WQ, Piece::WR, Piece::WB, Piece::WN]),
             black_promotions: IdxVec(vec![Piece::BQ, Piece::BR, Piece::BB, Piece::BN]),
+            is_sliding_piece: IdxVec(vec![
+                false, false, false, true, true, true, false, false, false, true, true, true, false,
+            ]),
+            sliding: IdxVec(vec![
+                Piece::WB,
+                Piece::WR,
+                Piece::WQ,
+                Piece::WN,
+                Piece::WK,
+                Piece::BB,
+                Piece::BR,
+                Piece::BQ,
+                Piece::BN,
+                Piece::BK,
+            ]),
+            castling_perm: IdxVec(vec![
+                15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15,
+                13, 15, 15, 15, 12, 15, 15, 14, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15,
+                15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15,
+                15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15,
+                15, 15, 15, 15, 15, 15, 15, 7, 15, 15, 15, 3, 15, 15, 11, 15, 15, 15, 15, 15, 15,
+                15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15,
+            ]),
         }
     }
 }
-

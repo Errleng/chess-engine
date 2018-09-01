@@ -10,12 +10,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="580f56ea-ce05-4e82-b87e-288eeef8f7a2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/bitboard.rs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/board.rs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/moves.rs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/position.rs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/types.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../pulse-master/src/main/cpp/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../pulse-master/src/main/cpp/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bitboard.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/bitboard.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/board.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/board.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/moves.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/moves.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/position.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/position.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/types.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/types.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/debug/Rice.d" beforeDir="false" afterPath="$PROJECT_DIR$/target/debug/Rice.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/debug/Rice.exe" beforeDir="false" afterPath="$PROJECT_DIR$/target/debug/Rice.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/debug/Rice.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/target/debug/Rice.pdb" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -41,41 +46,47 @@
     <session id="-17157708">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="10" />
+          <entry key="project.closed" value="15" />
           <entry key="project.open.time.16" value="2" />
           <entry key="project.open.time.18" value="1" />
+          <entry key="project.open.time.20" value="1" />
+          <entry key="project.open.time.21" value="1" />
           <entry key="project.open.time.27" value="1" />
           <entry key="project.open.time.3" value="1" />
+          <entry key="project.open.time.34" value="1" />
+          <entry key="project.open.time.37" value="1" />
           <entry key="project.open.time.39" value="1" />
+          <entry key="project.open.time.4" value="1" />
           <entry key="project.open.time.40" value="2" />
           <entry key="project.open.time.41" value="1" />
           <entry key="project.open.time.42" value="1" />
           <entry key="project.open.time.45" value="1" />
-          <entry key="project.opened" value="11" />
+          <entry key="project.opened" value="16" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="rs" value="30" />
+          <entry key="rs" value="31" />
           <entry key="toml" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="PLAIN_TEXT" value="6" />
-          <entry key="Rust" value="30" />
+          <entry key="Rust" value="31" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="rs" value="63150" />
+          <entry key="rs" value="65702" />
           <entry key="toml" value="45" />
+          <entry key="txt" value="31" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="PLAIN_TEXT" value="45" />
-          <entry key="Rust" value="63150" />
+          <entry key="PLAIN_TEXT" value="76" />
+          <entry key="Rust" value="65702" />
         </counts>
       </usages-collector>
     </session>
@@ -85,17 +96,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main.rs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="509">
-              <caret line="128" column="129" lean-forward="true" selection-start-line="128" selection-start-column="129" selection-end-line="128" selection-end-column="129" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/types.rs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="11" selection-start-line="11" selection-end-line="11" />
+            <state relative-caret-position="380">
+              <caret line="55" column="74" selection-start-line="55" selection-start-column="74" selection-end-line="55" selection-end-column="74" />
             </state>
           </provider>
         </entry>
@@ -103,21 +105,22 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/board.rs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6500">
-              <caret line="326" column="23" selection-start-line="326" selection-start-column="23" selection-end-line="326" selection-end-column="23" />
+            <state relative-caret-position="289">
+              <caret line="530" column="64" selection-start-line="530" selection-start-column="64" selection-end-line="530" selection-end-column="64" />
               <folding>
-                <element signature="e#6077#6078#0" expanded="true" />
-                <element signature="e#6126#6127#0" expanded="true" />
+                <element signature="e#6307#6308#0" expanded="true" />
+                <element signature="e#6356#6357#0" expanded="true" />
+                <element signature="e#6408#6409#0" expanded="true" />
+                <element signature="e#6465#6466#0" expanded="true" />
+                <element signature="e#6513#6514#0" expanded="true" />
+                <element signature="e#6546#6547#0" expanded="true" />
+                <element signature="e#6591#6592#0" expanded="true" />
+                <element signature="e#6624#6625#0" expanded="true" />
+                <element signature="e#6676#6677#0" expanded="true" />
+                <element signature="e#6727#6728#0" expanded="true" />
+                <element signature="e#7035#7036#0" expanded="true" />
+                <element signature="e#7077#7078#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/moves.rs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2420">
-              <caret line="149" column="54" selection-start-line="149" selection-start-column="54" selection-end-line="149" selection-end-column="54" />
             </state>
           </provider>
         </entry>
@@ -125,17 +128,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/position.rs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2080">
-              <caret line="104" column="88" selection-start-line="104" selection-start-column="88" selection-end-line="104" selection-end-column="88" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/bitboard.rs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="9" column="14" selection-start-line="9" selection-start-column="14" selection-end-line="9" selection-end-column="14" />
+            <state relative-caret-position="5980">
+              <caret line="299" column="49" selection-start-line="299" selection-start-column="40" selection-end-line="299" selection-end-column="49" />
             </state>
           </provider>
         </entry>
@@ -151,19 +145,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>fr_to</find>
-      <find>' +</find>
-      <find>global.</find>
-      <find>is_knight</find>
-      <find>option</find>
-      <find>Option</find>
-      <find>history:</find>
-      <find>std::char</find>
-      <find>char::</find>
-      <find>piece:</find>
-      <find>gen_pos</find>
-      <find>util: &amp;util,</find>
-      <find>&amp;util.</find>
       <find>check_</find>
       <find>util: &amp;board::Util</find>
       <find>(util)</find>
@@ -181,11 +162,21 @@
       <find>sq+9</find>
       <find>sq + 9</find>
       <find>sq + 11</find>
+      <find>bishop_dir</find>
+      <find>add_pawn</find>
+      <find>attacked</find>
+      <find>is_Sq_at</find>
+      <find>self.sq_attacked</find>
+      <find>sq_attac</find>
+      <find>BLACK</find>
+      <find>WHITE</find>
+      <find>sq_attacked</find>
+      <find>self.side</find>
+      <find>castling</find>
+      <find>Castling</find>
+      <find>piece_dir</find>
     </findStrings>
     <replaceStrings>
-      <replace>board::Side::Both_Idx</replace>
-      <replace>board::Side::Black_Idx</replace>
-      <replace>Index</replace>
       <replace />
       <replace>pce</replace>
       <replace>u32</replace>
@@ -213,6 +204,9 @@
       <replace>sq+11</replace>
       <replace>left_cap</replace>
       <replace>right_cap</replace>
+      <replace>!self.sq_attacked</replace>
+      <replace>WHITE</replace>
+      <replace>BLACK</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -227,10 +221,10 @@
         <option value="$PROJECT_DIR$/src/types.rs" />
         <option value="$PROJECT_DIR$/src/move.rs" />
         <option value="$PROJECT_DIR$/src/bitboard.rs" />
-        <option value="$PROJECT_DIR$/src/board.rs" />
-        <option value="$PROJECT_DIR$/src/position.rs" />
         <option value="$PROJECT_DIR$/src/moves.rs" />
         <option value="$PROJECT_DIR$/src/main.rs" />
+        <option value="$PROJECT_DIR$/src/position.rs" />
+        <option value="$PROJECT_DIR$/src/board.rs" />
       </list>
     </option>
   </component>
@@ -252,7 +246,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -269,6 +262,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -276,7 +270,7 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="org.rust.cargo.project.model.PROJECT_DISCOVERY" value="true" />
-    <property name="settings.editor.selected.configurable" value="com.maddyhome.idea.vim.ui.VimEmulationConfigurable" />
+    <property name="settings.editor.selected.configurable" value="CPPToolchains" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -290,7 +284,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Cargo Command.Run Rice">
     <configuration name="Cargo Run" type="CargoCommandRunConfiguration" factoryName="Cargo Command">
       <option name="channel" value="DEFAULT" />
       <option name="command" value="run" />
@@ -300,6 +294,24 @@
       <envs />
       <method v="2" />
     </configuration>
+    <configuration name="Run Rice" type="CargoCommandRunConfiguration" factoryName="Cargo Command" temporary="true">
+      <option name="channel" value="DEFAULT" />
+      <option name="command" value="run --package Rice --bin Rice" />
+      <option name="nocapture" value="true" />
+      <option name="backtrace" value="SHORT" />
+      <option name="workingDirectory" value="file://$PROJECT_DIR$" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Cargo Command.Cargo Run" />
+      <item itemvalue="Cargo Command.Run Rice" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Cargo Command.Run Rice" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -322,11 +334,16 @@
       <workItem from="1534716241470" duration="1798000" />
       <workItem from="1534721338135" duration="3396000" />
       <workItem from="1534750896750" duration="13000" />
+      <workItem from="1535492497039" duration="1176000" />
+      <workItem from="1535687999206" duration="1792000" />
+      <workItem from="1535689864836" duration="2838000" />
+      <workItem from="1535754469410" duration="1014000" />
+      <workItem from="1535757125025" duration="2559000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="93450000" />
+    <option name="totallyTimeSpent" value="102829000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -339,27 +356,26 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.10714286" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.10394456" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49840087" weight="0.33333334" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" />
-      <window_info anchor="bottom" id="Terminal" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50159913" side_tool="true" weight="0.29222223" />
+      <window_info anchor="bottom" id="Debug" order="2" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="3" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="5" />
+      <window_info anchor="bottom" id="Database Changes" order="6" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Terminal" order="8" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50159913" side_tool="true" weight="0.29222223" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Cargo" order="3" />
       <window_info anchor="right" id="Database" order="4" weight="0.32995737" />
+      <window_info anchor="right" id="Run" order="5" sideWeight="0.49840087" weight="0.21428572" />
     </layout>
     <layout-to-restore>
       <window_info content_ui="combo" id="Project" order="0" weight="0.10607676" />
@@ -448,13 +464,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main.rs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="509">
-          <caret line="128" column="129" lean-forward="true" selection-start-line="128" selection-start-column="129" selection-end-line="128" selection-end-column="129" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/types.rs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
@@ -462,35 +471,52 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/board.rs">
+    <entry file="file://$PROJECT_DIR$/src/bitboard.rs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6500">
-          <caret line="326" column="23" selection-start-line="326" selection-start-column="23" selection-end-line="326" selection-end-column="23" />
-          <folding>
-            <element signature="e#6077#6078#0" expanded="true" />
-            <element signature="e#6126#6127#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="180">
+          <caret line="9" column="14" selection-start-line="9" selection-start-column="14" selection-end-line="9" selection-end-column="14" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/moves.rs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2420">
-          <caret line="149" column="54" selection-start-line="149" selection-start-column="54" selection-end-line="149" selection-end-column="54" />
+        <state relative-caret-position="329">
+          <caret line="167" column="54" selection-start-line="167" selection-start-column="54" selection-end-line="167" selection-end-column="54" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/position.rs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2080">
-          <caret line="104" column="88" selection-start-line="104" selection-start-column="88" selection-end-line="104" selection-end-column="88" />
+        <state relative-caret-position="5980">
+          <caret line="299" column="49" selection-start-line="299" selection-start-column="40" selection-end-line="299" selection-end-column="49" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/bitboard.rs">
+    <entry file="file://$PROJECT_DIR$/src/board.rs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="9" column="14" selection-start-line="9" selection-start-column="14" selection-end-line="9" selection-end-column="14" />
+        <state relative-caret-position="289">
+          <caret line="530" column="64" selection-start-line="530" selection-start-column="64" selection-end-line="530" selection-end-column="64" />
+          <folding>
+            <element signature="e#6307#6308#0" expanded="true" />
+            <element signature="e#6356#6357#0" expanded="true" />
+            <element signature="e#6408#6409#0" expanded="true" />
+            <element signature="e#6465#6466#0" expanded="true" />
+            <element signature="e#6513#6514#0" expanded="true" />
+            <element signature="e#6546#6547#0" expanded="true" />
+            <element signature="e#6591#6592#0" expanded="true" />
+            <element signature="e#6624#6625#0" expanded="true" />
+            <element signature="e#6676#6677#0" expanded="true" />
+            <element signature="e#6727#6728#0" expanded="true" />
+            <element signature="e#7035#7036#0" expanded="true" />
+            <element signature="e#7077#7078#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main.rs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="55" column="74" selection-start-line="55" selection-start-column="74" selection-end-line="55" selection-end-column="74" />
         </state>
       </provider>
     </entry>

@@ -1,8 +1,8 @@
 use board;
-use board::Side;
+use board::File;
 use board::Piece;
 use board::Rank;
-use board::File;
+use board::Side;
 use board::Square;
 use types::IdxVec;
 
@@ -20,9 +20,20 @@ pub struct Move<'a> {
 }
 
 impl<'a> Move<'a> {
-    pub fn construct(util: &board::Util, from_sq: u8, to_sq: u8, capture: u8, promotion: u8, flag: u32) -> Move {
+    pub fn construct(
+        util: &board::Util,
+        from_sq: u8,
+        to_sq: u8,
+        capture: u8,
+        promotion: u8,
+        flag: u32,
+    ) -> Move {
         Move {
-            mv: (from_sq as u32) | ((to_sq as u32) << 7) | ((capture as u32) << 14) | ((promotion as u32) << 20) | flag,
+            mv: (from_sq as u32)
+                | ((to_sq as u32) << 7)
+                | ((capture as u32) << 14)
+                | ((promotion as u32) << 20)
+                | flag,
             score: 0,
             util: util,
         }
@@ -33,12 +44,6 @@ impl<'a> Move<'a> {
             score: 0,
             util: util,
         }
-    }
-
-    pub fn sq_to_string(&self, sq: u8) -> String {
-        let file = self.util.files[sq];
-        let rank = self.util.ranks[sq];
-        format!("{}{}", (file + 'a' as u8) as char, (rank + '1' as u8) as char)
     }
 
     pub fn to_string(&self) -> String {
@@ -58,9 +63,22 @@ impl<'a> Move<'a> {
             } else if !self.util.is_rook_queen[promoted] && self.util.is_bishop_queen[promoted] {
                 pce_char = 'b';
             }
-            format!("{}{}{}{}{}", ('a' as u8 + file_from) as char, ('1' as u8 + rank_from) as char, ('a' as u8 + file_to) as char, ('1' as u8 + rank_to) as char, pce_char)
+            format!(
+                "{}{}{}{}{}",
+                ('a' as u8 + file_from) as char,
+                ('1' as u8 + rank_from) as char,
+                ('a' as u8 + file_to) as char,
+                ('1' as u8 + rank_to) as char,
+                pce_char
+            )
         } else {
-            format!("{}{}{}{}", ('a' as u8 + file_from) as char, ('1' as u8 + rank_from) as char, ('a' as u8 + file_to) as char, ('1' as u8 + rank_to) as char)
+            format!(
+                "{}{}{}{}",
+                ('a' as u8 + file_from) as char,
+                ('1' as u8 + rank_from) as char,
+                ('a' as u8 + file_to) as char,
+                ('1' as u8 + rank_to) as char
+            )
         }
     }
 
