@@ -1,0 +1,1 @@
+{"rustc":12275016885606546756,"features":"[\"minwindef\", \"ntsecapi\", \"profileapi\", \"winnt\"]","target":12058900896200619676,"profile":14245719688690734572,"path":5073374730684244109,"deps":[["winapi-x86_64-pc-windows-gnu v0.4.0","winapi_x86_64_pc_windows_gnu",9805487620731759938]],"local":[{"Precalculated":"0.3.5"}],"rustflags":[],"edition":"Edition2015"}

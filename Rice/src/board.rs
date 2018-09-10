@@ -307,6 +307,7 @@ pub struct Util {
     pub files: IdxVec<u8>,
 
     // piece checking
+    pub is_pawn: IdxVec<bool>,
     pub is_knight: IdxVec<bool>,
     pub is_king: IdxVec<bool>,
     pub is_rook_queen: IdxVec<bool>,
@@ -493,6 +494,10 @@ impl Default for Util {
             ]),
             ranks: IdxVec(vec![Square::OFFBOARD; REPR_NUM_SQUARES]),
             files: IdxVec(vec![Square::OFFBOARD; REPR_NUM_SQUARES]),
+            is_pawn: IdxVec(vec![
+                false, true, false, false, false, false, false, true, false, false, false, false,
+                false,
+            ]),
             is_knight: IdxVec(vec![
                 false, false, true, false, false, false, false, false, true, false, false, false,
                 false,

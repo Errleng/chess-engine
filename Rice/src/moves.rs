@@ -14,14 +14,14 @@ pub const PROMOTION_FLAG: u32 = 0xF00000;
 
 #[derive(Copy, Clone)]
 pub struct Move<'a> {
+    pub util: &'a board::Util,
     pub mv: u32,
     pub score: u32,
-    pub util: &'a board::Util,
 }
 
 impl<'a> Move<'a> {
     pub fn construct(
-        util: &board::Util,
+        util: &'a board::Util,
         from_sq: u8,
         to_sq: u8,
         capture: u8,
@@ -40,12 +40,11 @@ impl<'a> Move<'a> {
     }
     pub fn init(util: &board::Util) -> Move {
         Move {
+            util: util,
             mv: 0,
             score: 0,
-            util: util,
         }
     }
-
     pub fn to_string(&self) -> String {
         let file_from = self.util.files[self.from_sq()];
         let rank_from = self.util.ranks[self.from_sq()];
@@ -129,18 +128,38 @@ impl<'a> Move<'a> {
 }
 
 #[derive(Copy, Clone)]
-pub struct PastMove {
-    pub mv: u8,
+pub struct PastMove<'a> {
+    pub util: &'a board::Util,
+    pub mv: Move<'a>,
     pub castling_status: u8,
     pub enpassant: u8,
     pub fifty_moves: u8,
     pub key: u64,
 }
 
-impl Default for PastMove {
-    fn default() -> PastMove {
+impl<'a> PastMove<'a> {
+    pub fn construct(
+        util: &'a board::Util,
+        mv: Move,
+        castling_status: u8,
+        enpassant: u8,
+        fifty_moves: u8,
+        key: u64,
+    ) -> PastMove<'a> {
         PastMove {
-            mv: 0,
+            util: util,
+            mv: Move::init(util),
+            castling_status: castling_status,
+            enpassant: enpassant,
+            fifty_moves: fifty_moves,
+            key: 0,
+        }
+    }
+
+    pub fn init(util: &'a board::Util) -> PastMove<'a> {
+        PastMove {
+            util: util,
+            mv: Move::init(util),
             castling_status: 0,
             enpassant: 0,
             fifty_moves: 0,

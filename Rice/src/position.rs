@@ -10,10 +10,11 @@ use board::Util;
 use moves;
 use moves::Move;
 use types::IdxVec;
+use types::FlattenedIdxVec;
 
 #[derive(Clone)]
 pub struct Position<'a> {
-    //    pub side: u8,
+//    pub side: u8,
 //    pub enpassant: u8,
 //    pub fifty_moves: u8,
 //    pub ply: u8,
@@ -31,7 +32,7 @@ pub struct Position<'a> {
 //    pub pawns: [bitboard::BitBoard; 3],
 //    pub piece_list: [[u8; 10]; 13],
 
-    //    pub history: [Option<PastMove>; board::MAX_MOVES],
+//    pub history: [Option<PastMove>; board::MAX_MOVES],
 //    pub bb: bitboard::BitBoard,
     pub side: u8,
     pub enpassant: u8,
@@ -49,9 +50,9 @@ pub struct Position<'a> {
     pub major_pieces: IdxVec<u8>,
     pub minor_pieces: IdxVec<u8>,
     pub pawns: IdxVec<bitboard::BitBoard<'a>>,
-    pub piece_list: IdxVec<IdxVec<u8>>,
+    pub piece_list: FlattenedIdxVec<u8>,
 
-    pub history: IdxVec<moves::PastMove>,
+    pub history: IdxVec<moves::PastMove<'a>>,
     pub bb: bitboard::BitBoard<'a>,
     pub util: &'a Util,
 }
@@ -75,12 +76,197 @@ impl<'a> Position<'a> {
             major_pieces: IdxVec(vec![0; 2]),
             minor_pieces: IdxVec(vec![0; 2]),
             pawns: IdxVec(vec![bitboard::BitBoard::init(util); 3]),
-            piece_list: IdxVec(vec![IdxVec(vec![0; 10]); 13]),
-
-            history: IdxVec(vec![Default::default(); board::MAX_MOVES]),
+            piece_list: FlattenedIdxVec {
+                row: 13,
+                col: 10,
+                cont: vec![0; 13 * 10],
+            },
+            history: IdxVec(vec![moves::PastMove::init(util); board::MAX_MOVES]),
             bb: bitboard::BitBoard::init(util),
             util: util,
         }
+    }
+
+    pub fn make_move(&mut self, mv: moves::Move<'a>) {
+        let from_sq = mv.from_sq() as u8;
+        let to_sq = mv.to_sq() as u8;
+        debug_assert!(self.check_board());
+        debug_assert!(self.util.is_square_valid(from_sq));
+        debug_assert!(self.util.is_square_valid(to_sq));
+        debug_assert!(self.util.is_side_valid(self.side));
+        debug_assert!(self.util.is_piece_valid(self.pieces[from_sq]));
+        self.history[self.hist_ply].key = self.key;
+        if mv.is_enpassant() {
+            if self.side == Side::WHITE {
+                self.clear_piece(to_sq - 10);
+            } else {
+                self.clear_piece(to_sq + 10);
+            }
+        } else if mv.is_castle() {
+            match to_sq {
+                Square::C1 => self.move_piece(Square::A1, Square::D1),
+                Square::C8 => self.move_piece(Square::A8, Square::D8),
+                Square::G1 => self.move_piece(Square::H1, Square::F1),
+                Square::G8 => self.move_piece(Square::H8, Square::F8),
+                _ => (),
+            }
+        }
+
+        if self.enpassant != Square::NONE {
+            self.hash_enpassant();
+        }
+        self.hash_castling(); // Hash out current state
+        self.history[self.hist_ply].mv = mv;
+
+        self.castling &= self.util.castling_perm[from_sq];
+        self.castling &= self.util.castling_perm[to_sq];
+        self.enpassant = Square::NONE;
+
+        self.hash_castling(); // Hash in new state
+
+        let captured = mv.captured() as u8;
+        if captured != Piece::EMPTY {
+            debug_assert!(self.util.is_piece_valid(captured));
+            self.clear_piece(to_sq);
+            self.fifty_moves = 0;
+        }
+
+        self.ply += 1;
+        self.hist_ply += 1;
+
+        if self.util.is_pawn[self.pieces[from_sq]] {
+            self.fifty_moves = 0;
+            if mv.is_pawn_start() {
+                if self.side == Side::WHITE {
+                    self.enpassant = from_sq + 10;
+                    debug_assert!(self.util.ranks[self.enpassant] == Rank::RANK_2);
+                } else {
+                    self.enpassant = from_sq - 10;
+                    debug_assert!(self.util.ranks[self.enpassant] == Rank::RANK_6);
+                }
+                self.hash_enpassant();
+            }
+        }
+
+        self.move_piece(from_sq, to_sq);
+        let promoted = mv.promoted() as u8;
+        if promoted != Piece::EMPTY {
+            debug_assert!(self.util.is_piece_valid(promoted) && !self.util.is_pawn[promoted]);
+            self.clear_piece(to_sq);
+            self.add_piece(to_sq, promoted);
+        }
+
+        if self.util.is_king[self.pieces[to_sq]] {
+            self.king_squares[self.side] = to_sq;
+        }
+        self.side ^= 1;
+        if self.sq_attacked(self.king_squares[self.side] as i8, self.side) {
+            self.take_move();
+            false
+        }
+        true
+    }
+
+    pub fn hash_piece(&mut self, pce: u8, sq: u8) {
+        self.key ^= self.util.piece_keys[(pce, sq)];
+    }
+
+    pub fn hash_castling(&mut self) {
+        self.key ^= self.util.castle_keys[self.castling];
+    }
+
+    pub fn hash_side(&mut self) {
+        self.key ^= self.util.side_key;
+    }
+
+    pub fn hash_enpassant(&mut self) {
+        self.key ^= self.util.piece_keys[(Piece::EMPTY, self.enpassant)];
+    }
+
+    pub fn move_piece(&mut self, from_sq: u8, to_sq: u8) {
+        debug_assert!(self.util.is_square_valid(from_sq));
+        debug_assert!(self.util.is_square_valid(to_sq));
+        let pce = self.pieces[from_sq];
+        debug_assert!(self.util.is_piece_valid(pce));
+        let colour = self.util.piece_colours[pce];
+
+        self.hash_piece(pce, from_sq);
+        self.pieces[from_sq] = Piece::EMPTY;
+        self.hash_piece(pce, to_sq);
+        self.pieces[to_sq] = pce;
+
+        if !self.util.is_big_piece[pce] {
+            self.pawns[colour].clear_bit(self.util.sq120_to_sq64[from_sq]);
+            self.pawns[Side::BOTH].clear_bit(self.util.sq120_to_sq64[from_sq]);
+            self.pawns[colour].set_bit(self.util.sq120_to_sq64[to_sq]);
+            self.pawns[Side::BOTH].set_bit(self.util.sq120_to_sq64[to_sq]);
+        }
+        let mut piece_num = false;
+        for i in 0..self.piece_count[pce] {
+            if self.piece_list[(pce, i)] == from_sq {
+                piece_num = true;
+                break;
+            }
+        }
+        debug_assert!(piece_num);
+    }
+
+    pub fn add_piece(&mut self, sq: u8, pce: u8) {
+        debug_assert!(self.util.is_square_valid(sq));
+        debug_assert!(self.util.is_piece_valid(pce));
+        let colour = self.util.piece_colours[pce];
+
+        self.hash_piece(pce, sq);
+        self.pieces[sq] = pce;
+
+        if self.util.is_big_piece[pce] {
+            self.big_pieces[colour] += 1;
+            if self.util.is_major_piece[pce] {
+                self.major_pieces[colour] += 1;
+            } else {
+                self.minor_pieces[colour] += 1;
+            }
+        } else {
+            self.pawns[colour].set_bit(self.util.sq120_to_sq64[sq]);
+            self.pawns[Side::BOTH].set_bit(self.util.sq120_to_sq64[sq]);
+        }
+        self.material[colour] += self.util.piece_values[pce];
+        self.piece_list[(pce, self.piece_count[pce])] = sq;
+        self.piece_count[pce] += 1;
+    }
+
+    pub fn clear_piece(&mut self, sq: u8) {
+        debug_assert!(self.util.is_square_valid(sq));
+        let pce = self.pieces[sq];
+        debug_assert!(self.util.is_piece_valid(pce));
+        let colour = self.util.piece_colours[pce];
+
+        self.hash_piece(pce, sq);
+        self.pieces[sq] = Piece::EMPTY;
+        self.material[colour] -= self.util.piece_values[pce];
+
+        if self.util.is_big_piece[pce] {
+            self.big_pieces[colour] -= 1;
+            if self.util.is_major_piece[pce] {
+                self.major_pieces[colour] -= 1;
+            } else {
+                self.minor_pieces[colour] -= 1;
+            }
+        } else {
+            self.pawns[colour].clear_bit(self.util.sq120_to_sq64[sq]);
+            self.pawns[Side::BOTH].clear_bit(self.util.sq120_to_sq64[sq]);
+        }
+        let mut piece_num = 0; // If errors occur set to -1
+        for i in 0..self.piece_count[pce] {
+            if self.piece_list[(pce, i)] == sq {
+                piece_num = i;
+                break;
+            }
+        }
+
+        debug_assert!(piece_num > 0);
+        self.piece_count[pce] -= 1;
+        self.piece_list[(pce, piece_num)] = self.piece_list[(pce, self.piece_count[pce])];
     }
 
     pub fn gen_moves(&self, mv_list: &mut moves::MoveList, side: u8) {
@@ -107,8 +293,8 @@ impl<'a> Position<'a> {
             non_sliding_end_pce = 5;
 
             if self.castling & Castling::WK != 0 {
-                if self.pieces[Square::F1] == Piece::EMPTs
-                    && self.pieces[Square::G1] == Piece::EMPTs
+                if self.pieces[Square::F1] == Piece::EMPTY
+                    && self.pieces[Square::G1] == Piece::EMPTY
                 {
                     if !self.sq_attacked(Square::E1 as i8, Side::BLACK)
                         && !self.sq_attacked(Square::F1 as i8, Side::BLACK)
@@ -118,8 +304,8 @@ impl<'a> Position<'a> {
                                 self.util,
                                 Square::E1,
                                 Square::G1,
-                                Piece::EMPTs,
-                                Piece::EMPTs,
+                                Piece::EMPTY,
+                                Piece::EMPTY,
                                 moves::CASTLE_FLAG,
                             ),
                             mv_list,
@@ -129,9 +315,9 @@ impl<'a> Position<'a> {
                 }
             }
             if self.castling & Castling::WQ != 0 {
-                if self.pieces[Square::D1] == Piece::EMPTs
-                    && self.pieces[Square::C1] == Piece::EMPTs
-                    && self.pieces[Square::B1] == Piece::EMPTs
+                if self.pieces[Square::D1] == Piece::EMPTY
+                    && self.pieces[Square::C1] == Piece::EMPTY
+                    && self.pieces[Square::B1] == Piece::EMPTY
                 {
                     if !self.sq_attacked(Square::E1 as i8, Side::BLACK)
                         && !self.sq_attacked(Square::D1 as i8, Side::BLACK)
@@ -141,8 +327,8 @@ impl<'a> Position<'a> {
                                 self.util,
                                 Square::E1,
                                 Square::C1,
-                                Piece::EMPTs,
-                                Piece::EMPTs,
+                                Piece::EMPTY,
+                                Piece::EMPTY,
                                 moves::CASTLE_FLAG,
                             ),
                             mv_list,
@@ -162,8 +348,8 @@ impl<'a> Position<'a> {
             non_sliding_end_pce = 10;
 
             if self.castling & Castling::BK != 0 {
-                if self.pieces[Square::F8] == Piece::EMPTs
-                    && self.pieces[Square::G8] == Piece::EMPTs
+                if self.pieces[Square::F8] == Piece::EMPTY
+                    && self.pieces[Square::G8] == Piece::EMPTY
                 {
                     if !self.sq_attacked(Square::E8 as i8, Side::WHITE)
                         && !self.sq_attacked(Square::F8 as i8, Side::WHITE)
@@ -173,8 +359,8 @@ impl<'a> Position<'a> {
                                 self.util,
                                 Square::E8,
                                 Square::G8,
-                                Piece::EMPTs,
-                                Piece::EMPTs,
+                                Piece::EMPTY,
+                                Piece::EMPTY,
                                 moves::CASTLE_FLAG,
                             ),
                             mv_list,
@@ -184,9 +370,9 @@ impl<'a> Position<'a> {
                 }
             }
             if self.castling & Castling::BQ != 0 {
-                if self.pieces[Square::D8] == Piece::EMPTs
-                    && self.pieces[Square::C8] == Piece::EMPTs
-                    && self.pieces[Square::B1] == Piece::EMPTs
+                if self.pieces[Square::D8] == Piece::EMPTY
+                    && self.pieces[Square::C8] == Piece::EMPTY
+                    && self.pieces[Square::B1] == Piece::EMPTY
                 {
                     if !self.sq_attacked(Square::E8 as i8, Side::WHITE)
                         && !self.sq_attacked(Square::D8 as i8, Side::WHITE)
@@ -196,8 +382,8 @@ impl<'a> Position<'a> {
                                 self.util,
                                 Square::E1,
                                 Square::C8,
-                                Piece::EMPTs,
-                                Piece::EMPTs,
+                                Piece::EMPTY,
+                                Piece::EMPTY,
                                 moves::CASTLE_FLAG,
                             ),
                             mv_list,
@@ -210,7 +396,7 @@ impl<'a> Position<'a> {
             return;
         }
         for pce_cnt in 0..self.piece_count[side_pawn] {
-            let sq = self.piece_list[side_pawn][pce_cnt];
+            let sq = self.piece_list[(side_pawn, pce_cnt)];
             let left_cap = sq as i8 + pawn_offsets[1];
             let right_cap = sq as i8 + pawn_offsets[2];
             let front_sq = sq as i8 + pawn_offsets[0];
@@ -229,17 +415,17 @@ impl<'a> Position<'a> {
             let jump_sq = jump_sq as u8;
 
             debug_assert!(self.util.is_square_valid(sq));
-            if self.pieces[front_sq] == Piece::EMPTs {
-                self.add_pawn_move(side, sq, front_sq, Piece::EMPTs, mv_list);
-                if self.util.ranks[sq] == pawn_starting_rank && self.pieces[jump_sq] == Piece::EMPTs
+            if self.pieces[front_sq] == Piece::EMPTY {
+                self.add_pawn_move(side, sq, front_sq, Piece::EMPTY, mv_list);
+                if self.util.ranks[sq] == pawn_starting_rank && self.pieces[jump_sq] == Piece::EMPTY
                 {
                     self.add_quiet_move(
                         Move::construct(
                             self.util,
                             sq,
                             jump_sq,
-                            Piece::EMPTs,
-                            Piece::EMPTs,
+                            Piece::EMPTY,
+                            Piece::EMPTY,
                             moves::PAWN_START_FLAG,
                         ),
                         mv_list,
@@ -262,8 +448,8 @@ impl<'a> Position<'a> {
                         self.util,
                         sq,
                         left_cap,
-                        Piece::EMPTs,
-                        Piece::EMPTs,
+                        Piece::EMPTY,
+                        Piece::EMPTY,
                         moves::ENPASSANT_FLAG,
                     ),
                     mv_list,
@@ -274,8 +460,8 @@ impl<'a> Position<'a> {
                         self.util,
                         sq,
                         right_cap,
-                        Piece::EMPTs,
-                        Piece::EMPTs,
+                        Piece::EMPTY,
+                        Piece::EMPTY,
                         moves::ENPASSANT_FLAG,
                     ),
                     mv_list,
@@ -293,7 +479,7 @@ impl<'a> Position<'a> {
             //    _ => panic!("Unexpected piece in sliding move generation!"),
             //}
             for pce_cnt in 0..self.piece_count[pce] {
-                let sq = self.piece_list[pce][pce_cnt];
+                let sq = self.piece_list[(pce, pce_cnt)];
                 debug_assert!(self.util.is_square_valid(sq));
                 //println!("Piece {} is on {}", self.util.piece_chars[pce], self.util.sq_to_string(sq));
                 for i in 0..self.util.num_dir[pce] {
@@ -304,7 +490,7 @@ impl<'a> Position<'a> {
                     let mut offset = sq as i8 + dir;
                     while self.util.is_square_valid(offset as u8) {
                         let offset_pce = self.pieces[offset];
-                        if offset_pce != Piece::EMPTs {
+                        if offset_pce != Piece::EMPTY {
                             if self.util.piece_colours[offset_pce] == opposing_side {
                                 self.add_capture_move(
                                     Move::construct(
@@ -312,7 +498,7 @@ impl<'a> Position<'a> {
                                         sq,
                                         offset as u8,
                                         offset_pce,
-                                        Piece::EMPTs,
+                                        Piece::EMPTY,
                                         0,
                                     ),
                                     mv_list,
@@ -322,7 +508,14 @@ impl<'a> Position<'a> {
                             break;
                         }
                         self.add_quiet_move(
-                            Move::construct(self.util, sq, offset as u8, Piece::EMPTs, Piece::EMPTs, 0),
+                            Move::construct(
+                                self.util,
+                                sq,
+                                offset as u8,
+                                Piece::EMPTY,
+                                Piece::EMPTY,
+                                0,
+                            ),
                             mv_list,
                         );
                         //println!("Normal move on {}", self.util.sq_to_string(offset));
@@ -341,7 +534,7 @@ impl<'a> Position<'a> {
             //    _ => panic!("Unexpected piece in non-sliding move generation!"),
             //}
             for pce_cnt in 0..self.piece_count[pce] {
-                let sq = self.piece_list[pce][pce_cnt];
+                let sq = self.piece_list[(pce, pce_cnt)];
                 debug_assert!(self.util.is_square_valid(sq));
                 //println!("Piece {} is on {}", self.util.piece_chars[pce], self.util.sq_to_string(sq));
                 for i in 0..self.util.num_dir[pce] {
@@ -352,7 +545,7 @@ impl<'a> Position<'a> {
                     let offset = sq as i8 + dir;
                     if self.util.is_square_valid(offset as u8) {
                         let offset_pce = self.pieces[offset];
-                        if offset_pce != Piece::EMPTs {
+                        if offset_pce != Piece::EMPTY {
                             if self.util.piece_colours[offset_pce] == opposing_side {
                                 self.add_capture_move(
                                     Move::construct(
@@ -360,7 +553,7 @@ impl<'a> Position<'a> {
                                         sq,
                                         offset as u8,
                                         offset_pce,
-                                        Piece::EMPTs,
+                                        Piece::EMPTY,
                                         0,
                                     ),
                                     mv_list,
@@ -370,7 +563,14 @@ impl<'a> Position<'a> {
                             continue;
                         }
                         self.add_quiet_move(
-                            Move::construct(self.util, sq, offset as u8, Piece::EMPTs, Piece::EMPTs, 0),
+                            Move::construct(
+                                self.util,
+                                sq,
+                                offset as u8,
+                                Piece::EMPTY,
+                                Piece::EMPTY,
+                                0,
+                            ),
                             mv_list,
                         );
                         //println!("Normal move on {}", self.util.sq_to_string(offset));
@@ -402,7 +602,7 @@ impl<'a> Position<'a> {
         capture: u8,
         mv_list: &mut moves::MoveList,
     ) {
-        debug_assert!(self.util.is_piece_valid(capture) || capture == Piece::EMPTs);
+        debug_assert!(self.util.is_piece_valid(capture) || capture == Piece::EMPTY);
         debug_assert!(self.util.is_square_valid(from_sq));
         debug_assert!(self.util.is_square_valid(to_sq));
 
@@ -411,7 +611,7 @@ impl<'a> Position<'a> {
         if side == Side::BLACK {
             promotions = &self.util.black_promotions;
         }
-        if capture != Piece::EMPTs {
+        if capture != Piece::EMPTY {
             let add_move = Position::add_capture_move;
         }
         if (side == Side::WHITE && self.util.ranks[from_sq] == Rank::RANK_7)
@@ -427,7 +627,7 @@ impl<'a> Position<'a> {
         } else {
             add_move(
                 &self,
-                moves::Move::construct(self.util, from_sq, to_sq, capture, Piece::EMPTs, 0),
+                moves::Move::construct(self.util, from_sq, to_sq, capture, Piece::EMPTY, 0),
                 mv_list,
             );
         }
@@ -464,7 +664,7 @@ impl<'a> Position<'a> {
         for i in 0..8 {
             //let pce = self.pieces[sq + self.util.knight_dir[i]];
             let pce = self.pieces[sq + self.util.piece_dir[(Piece::WN, i)]];
-            if pce != Square::OFFBOARD && pce != Piece::EMPTs {
+            if pce != Square::OFFBOARD && pce != Piece::EMPTY {
                 if self.util.is_knight[pce] && self.util.piece_colours[pce] == side {
                     return true;
                 }
@@ -476,7 +676,7 @@ impl<'a> Position<'a> {
             let mut offset = sq + dir;
             let mut pce = self.pieces[offset];
             while pce != Square::OFFBOARD {
-                if pce != Piece::EMPTs {
+                if pce != Piece::EMPTY {
                     if self.util.is_rook_queen[pce] && self.util.piece_colours[pce] == side {
                         return true;
                     }
@@ -492,7 +692,7 @@ impl<'a> Position<'a> {
             let mut offset = sq + dir;
             let mut pce = self.pieces[offset];
             while pce != Square::OFFBOARD {
-                if pce != Piece::EMPTs {
+                if pce != Piece::EMPTY {
                     if self.util.is_bishop_queen[pce] && self.util.piece_colours[pce] == side {
                         return true;
                     }
@@ -505,7 +705,7 @@ impl<'a> Position<'a> {
         for i in 0..8 {
             //let pce = self.pieces[sq + self.util.king_queen_dir[i]];
             let pce = self.pieces[sq + self.util.piece_dir[(Piece::WK, i)]];
-            if pce != Square::OFFBOARD && pce != Piece::EMPTs {
+            if pce != Square::OFFBOARD && pce != Piece::EMPTY {
                 if self.util.is_king[pce] && self.util.piece_colours[pce] == side {
                     return true;
                 }
@@ -520,7 +720,7 @@ impl<'a> Position<'a> {
 
         for pce in board::Piece::WP..=board::Piece::BK {
             for pce_cnt in 0..self.piece_count[pce] {
-                let sq120 = self.piece_list[pce][pce_cnt];
+                let sq120 = self.piece_list[(pce, pce_cnt)];
                 debug_assert!(self.pieces[sq120] == pce);
             }
         }
@@ -537,7 +737,7 @@ impl<'a> Position<'a> {
             } else if self.util.is_minor_piece[pce] {
                 temp_pos.minor_pieces[colour] += 1;
             }
-            if pce != Piece::EMPTs {
+            if pce != Piece::EMPTY {
                 temp_pos.material[colour] += self.util.piece_values[pce];
             }
         }
@@ -594,7 +794,7 @@ impl<'a> Position<'a> {
         for i in 0..board::REPR_NUM_SQUARES {
             let sq = i as u8;
             let pce = self.pieces[i];
-            if pce != board::Square::OFFBOARD && pce != board::Piece::EMPTs {
+            if pce != board::Square::OFFBOARD && pce != board::Piece::EMPTY {
                 let colour = self.util.piece_colours[pce];
 
                 if self.util.is_big_piece[pce] {
@@ -607,7 +807,7 @@ impl<'a> Position<'a> {
                     self.minor_pieces[colour] += 1;
                 }
                 self.material[colour] += self.util.piece_values[pce];
-                self.piece_list[pce][self.piece_count[pce]] = sq;
+                self.piece_list[(pce, self.piece_count[pce])] = sq;
                 self.piece_count[pce] += 1;
                 match pce {
                     board::Piece::WK | board::Piece::BK => self.king_squares[colour] = sq,
@@ -674,7 +874,7 @@ impl<'a> Position<'a> {
         }
 
         for i in 0..board::NUM_SQUARES {
-            self.pieces[self.util.sq64_to_sq120[i]] = board::Piece::EMPTs;
+            self.pieces[self.util.sq64_to_sq120[i]] = board::Piece::EMPTY;
         }
 
         for i in 0..2 {
@@ -733,7 +933,7 @@ impl<'a> Position<'a> {
                 'K' => piece = board::Piece::WK,
                 'Q' => piece = board::Piece::WQ,
                 '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' => {
-                    piece = board::Piece::EMPTs;
+                    piece = board::Piece::EMPTY;
                     count = ch.to_digit(10).expect("Expected digit character");
                 }
                 '/' | ' ' => {
@@ -747,7 +947,7 @@ impl<'a> Position<'a> {
             for _ in 0..count {
                 sq64 = rank * 8 + file as i8;
                 sq = self.util.sq64_to_sq120[sq64];
-                if piece != board::Piece::EMPTs {
+                if piece != board::Piece::EMPTY {
                     self.pieces[sq] = piece;
                 }
                 file += 1;
@@ -776,7 +976,7 @@ impl<'a> Position<'a> {
                 //                _ => panic!("Unexpected character while parsing castling FEN: {}", ch),
             }
         }
-        ch = fen_iter.next().expect("Expected whitespace");
+        fen_iter.next().expect("Expected whitespace");
 
         debug_assert!(self.castling >= 0 && self.castling <= 15);
 
