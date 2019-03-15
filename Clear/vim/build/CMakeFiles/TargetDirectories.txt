@@ -1,0 +1,3 @@
+/home/witness/Documents/Bitbucket/chessengine/Clear/build/CMakeFiles/rebuild_cache.dir
+/home/witness/Documents/Bitbucket/chessengine/Clear/build/CMakeFiles/clear.dir
+/home/witness/Documents/Bitbucket/chessengine/Clear/build/CMakeFiles/edit_cache.dir

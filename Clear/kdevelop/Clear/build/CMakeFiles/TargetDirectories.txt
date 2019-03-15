@@ -1,0 +1,7 @@
+/home/witness/Documents/Bitbucket/chessengine/Clear/kdevelop/Clear/build/CMakeFiles/install/strip.dir
+/home/witness/Documents/Bitbucket/chessengine/Clear/kdevelop/Clear/build/CMakeFiles/edit_cache.dir
+/home/witness/Documents/Bitbucket/chessengine/Clear/kdevelop/Clear/build/CMakeFiles/clear.dir
+/home/witness/Documents/Bitbucket/chessengine/Clear/kdevelop/Clear/build/CMakeFiles/install.dir
+/home/witness/Documents/Bitbucket/chessengine/Clear/kdevelop/Clear/build/CMakeFiles/rebuild_cache.dir
+/home/witness/Documents/Bitbucket/chessengine/Clear/kdevelop/Clear/build/CMakeFiles/list_install_components.dir
+/home/witness/Documents/Bitbucket/chessengine/Clear/kdevelop/Clear/build/CMakeFiles/install/local.dir
