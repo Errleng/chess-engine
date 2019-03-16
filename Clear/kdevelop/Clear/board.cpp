@@ -165,7 +165,7 @@ void Board::updateMaterial() {
 }
 
 
-void Board::generateAllMoves() {
+void Board::genAllMoves() {
     assert(check());
 
     moveList.count = 0;
@@ -190,31 +190,31 @@ void Board::generateAllMoves() {
             if (Utils::isSqOnBoard(toSq) && (PIECE_COLOUR[pieces[toSq]] == SIDE::BLACK)) {
                 moveList.addPawnCaptureMove(SIDE::WHITE, sq, toSq, pieces[toSq]);
             }
-            if (toSq == enPassant) {
-                moveList.addCaptureMove(Utils::createMoveInt(sq, toSq, PIECES::EMPTY, PIECES::EMPTY, FLAG_EN_PASSANT));
+            if ((toSq != SQUARES::NONE) && (toSq == enPassant)) {
+                moveList.addEnPassantMove(Utils::createMoveInt(sq, toSq, PIECES::EMPTY, PIECES::EMPTY, FLAG_EN_PASSANT));
             }
 
             toSq = sq + 11;
             if (Utils::isSqOnBoard(toSq) && (PIECE_COLOUR[pieces[toSq]] == SIDE::BLACK)) {
                 moveList.addPawnCaptureMove(SIDE::WHITE, sq, toSq, pieces[toSq]);
             }
-            if (toSq == enPassant) {
-                moveList.addCaptureMove(Utils::createMoveInt(sq, toSq, PIECES::EMPTY, PIECES::EMPTY, FLAG_EN_PASSANT));
+            if ((toSq != SQUARES::NONE) && (toSq == enPassant)) {
+                moveList.addEnPassantMove(Utils::createMoveInt(sq, toSq, PIECES::EMPTY, PIECES::EMPTY, FLAG_EN_PASSANT));
             }
-
-            if (castlePerm & CASTLING::WKCA) {
-                if ((pieces[SQUARES::F1] == PIECES::EMPTY) && (pieces[SQUARES::G1] == PIECES::EMPTY)) {
-                    if (!isSqAttacked(SQUARES::E1, SIDE::BLACK) && !isSqAttacked(SQUARES::F1, SIDE::BLACK)) {
-                        moveList.addQuietMove(Utils::createMoveInt(SQUARES::E1, SQUARES::G1, PIECES::EMPTY, PIECES::EMPTY, FLAG_CASTLE));
-                    }
+        }
+        
+        if (castlePerm & CASTLING::WKCA) {
+            if ((pieces[SQUARES::F1] == PIECES::EMPTY) && (pieces[SQUARES::G1] == PIECES::EMPTY)) {
+                if (!isSqAttacked(SQUARES::E1, SIDE::BLACK) && !isSqAttacked(SQUARES::F1, SIDE::BLACK)) {
+                    moveList.addQuietMove(Utils::createMoveInt(SQUARES::E1, SQUARES::G1, PIECES::EMPTY, PIECES::EMPTY, FLAG_CASTLE));
                 }
             }
+        }
 
-            if (castlePerm & CASTLING::WQCA) {
-                if ((pieces[SQUARES::D1] == PIECES::EMPTY) && (pieces[SQUARES::C1] == PIECES::EMPTY)) {
-                    if (!isSqAttacked(SQUARES::E1, SIDE::BLACK) && !isSqAttacked(SQUARES::D1, SIDE::BLACK)) {
-                        moveList.addQuietMove(Utils::createMoveInt(SQUARES::E1, SQUARES::C1, PIECES::EMPTY, PIECES::EMPTY, FLAG_CASTLE));
-                    }
+        if (castlePerm & CASTLING::WQCA) {
+            if ((pieces[SQUARES::D1] == PIECES::EMPTY) && (pieces[SQUARES::C1] == PIECES::EMPTY) && (pieces[SQUARES::B1] == PIECES::EMPTY)) {
+                if (!isSqAttacked(SQUARES::E1, SIDE::BLACK) && !isSqAttacked(SQUARES::D1, SIDE::BLACK)) {
+                    moveList.addQuietMove(Utils::createMoveInt(SQUARES::E1, SQUARES::C1, PIECES::EMPTY, PIECES::EMPTY, FLAG_CASTLE));
                 }
             }
         }
@@ -225,7 +225,7 @@ void Board::generateAllMoves() {
 
             int toSq = sq - 10;
             if (pieces[toSq] == PIECES::EMPTY) {
-                moveList.addPawnMove(SIDE::WHITE, sq, toSq);
+                moveList.addPawnMove(SIDE::BLACK, sq, toSq);
                 if (Utils::ranksBoard[sq] == RANKS::RANK_7) {
                     int jumpSq = sq - 20;
                     if (pieces[jumpSq] == EMPTY) {
@@ -236,33 +236,33 @@ void Board::generateAllMoves() {
 
             toSq = sq - 9;
             if (Utils::isSqOnBoard(toSq) && (PIECE_COLOUR[pieces[toSq]] == SIDE::WHITE)) {
-                moveList.addPawnCaptureMove(SIDE::WHITE, sq, toSq, pieces[toSq]);
+                moveList.addPawnCaptureMove(SIDE::BLACK, sq, toSq, pieces[toSq]);
             }
-            if (toSq == enPassant) {
-                moveList.addCaptureMove(Utils::createMoveInt(sq, toSq, PIECES::EMPTY, PIECES::EMPTY, FLAG_EN_PASSANT));
+            if ((toSq != SQUARES::NONE) && (toSq == enPassant)) {
+                moveList.addEnPassantMove(Utils::createMoveInt(sq, toSq, PIECES::EMPTY, PIECES::EMPTY, FLAG_EN_PASSANT));
             }
 
             toSq = sq - 11;
             if (Utils::isSqOnBoard(toSq) && (PIECE_COLOUR[pieces[toSq]] == SIDE::WHITE)) {
-                moveList.addPawnCaptureMove(SIDE::WHITE, sq, toSq, pieces[toSq]);
+                moveList.addPawnCaptureMove(SIDE::BLACK, sq, toSq, pieces[toSq]);
             }
-            if (toSq == enPassant) {
-                moveList.addCaptureMove(Utils::createMoveInt(sq, toSq, PIECES::EMPTY, PIECES::EMPTY, FLAG_EN_PASSANT));
+            if ((toSq != SQUARES::NONE) && (toSq == enPassant)) {
+                moveList.addEnPassantMove(Utils::createMoveInt(sq, toSq, PIECES::EMPTY, PIECES::EMPTY, FLAG_EN_PASSANT));
             }
+        }
 
-            if (castlePerm & CASTLING::BKCA) {
-                if ((pieces[SQUARES::F8] == PIECES::EMPTY) && (pieces[SQUARES::G8] == PIECES::EMPTY)) {
-                    if (!isSqAttacked(SQUARES::E8, SIDE::WHITE) && !isSqAttacked(SQUARES::F8, SIDE::WHITE)) {
-                        moveList.addQuietMove(Utils::createMoveInt(SQUARES::E8, SQUARES::G8, PIECES::EMPTY, PIECES::EMPTY, FLAG_CASTLE));
-                    }
+        if (castlePerm & CASTLING::BKCA) {
+            if ((pieces[SQUARES::F8] == PIECES::EMPTY) && (pieces[SQUARES::G8] == PIECES::EMPTY)) {
+                if (!isSqAttacked(SQUARES::E8, SIDE::WHITE) && !isSqAttacked(SQUARES::F8, SIDE::WHITE)) {
+                    moveList.addQuietMove(Utils::createMoveInt(SQUARES::E8, SQUARES::G8, PIECES::EMPTY, PIECES::EMPTY, FLAG_CASTLE));
                 }
             }
+        }
 
-            if (castlePerm & CASTLING::BQCA) {
-                if ((pieces[SQUARES::D8] == PIECES::EMPTY) && (pieces[SQUARES::C8] == PIECES::EMPTY)) {
-                    if (!isSqAttacked(SQUARES::E8, SIDE::WHITE) && !isSqAttacked(SQUARES::D8, SIDE::WHITE)) {
-                        moveList.addQuietMove(Utils::createMoveInt(SQUARES::E8, SQUARES::C8, PIECES::EMPTY, PIECES::EMPTY, FLAG_CASTLE));
-                    }
+        if (castlePerm & CASTLING::BQCA) {
+            if ((pieces[SQUARES::D8] == PIECES::EMPTY) && (pieces[SQUARES::C8] == PIECES::EMPTY) && (pieces[SQUARES::B8] == PIECES::EMPTY)) {
+                if (!isSqAttacked(SQUARES::E8, SIDE::WHITE) && !isSqAttacked(SQUARES::D8, SIDE::WHITE)) {
+                    moveList.addQuietMove(Utils::createMoveInt(SQUARES::E8, SQUARES::C8, PIECES::EMPTY, PIECES::EMPTY, FLAG_CASTLE));
                 }
             }
         }
@@ -275,7 +275,7 @@ void Board::generateAllMoves() {
     int pieceIndex = LOOP_SLIDER_INDEX[side];
     int piece = LOOP_SLIDERS[pieceIndex++];
     while (piece != 0) {
-        assert(Utils::isPieceValid(piece));
+        assert(Utils::isValidPiece(piece));
 
         for (int pieceNum = 0; pieceNum < pieceNums[piece]; ++pieceNum) {
             int sq = pieceList[piece][pieceNum];
@@ -303,7 +303,7 @@ void Board::generateAllMoves() {
     pieceIndex = LOOP_NON_SLIDER_INDEX[side];
     piece = LOOP_NON_SLIDERS[pieceIndex++];
     while (piece != 0) {
-        assert(Utils::isPieceValid(piece));
+        assert(Utils::isValidPiece(piece));
 
         for (int pieceNum = 0; pieceNum < pieceNums[piece]; ++pieceNum) {
             int sq = pieceList[piece][pieceNum];
@@ -332,7 +332,7 @@ void Board::generateAllMoves() {
 void Board::clearPiece(const int square) {
     assert(Utils::isSqOnBoard(square));
     int piece = pieces[square];
-    assert(Utils::isPieceValid(square));
+    assert(Utils::isValidPiece(piece));
     
     int colour = PIECE_COLOUR[piece];
     
@@ -358,6 +358,8 @@ void Board::clearPiece(const int square) {
     
     for (int i = 0; i < pieceNums[piece]; ++i) {
         if (pieceList[piece][i] == square) {
+            oldPieceNum = i;
+            break;
         }
     }
     
@@ -368,7 +370,7 @@ void Board::clearPiece(const int square) {
 }
 
 void Board::addPiece(const int square, const int piece) {
-    assert(Utils::isPieceValid(piece));
+    assert(Utils::isValidPiece(piece));
     assert(Utils::isSqOnBoard(square));
     
     int colour = PIECE_COLOUR[piece];
@@ -391,7 +393,240 @@ void Board::addPiece(const int square, const int piece) {
 	}
 	
 	material[colour] += PIECE_VALUES[piece];
-	pieceList[piece][pieceNums[piece]++] = square;
+	pieceList[piece][pieceNums[piece]] = square;
+    ++pieceNums[piece];
+}
+
+void Board::movePiece(const int fromSq, const int toSq) {
+    assert(Utils::isSqOnBoard(fromSq));
+    assert(Utils::isSqOnBoard(toSq));
+    
+    int piece = pieces[fromSq];
+    int colour = PIECE_COLOUR[piece];
+    
+    hashPiece(fromSq, piece);
+    pieces[fromSq] = PIECES::EMPTY;
+    
+    hashPiece(toSq, piece);
+    pieces[toSq] = piece;
+    
+    if (!IS_PIECE_BIG[piece]) {
+        int fromSq64 = Utils::sq120to64[fromSq];
+        int toSq64 = Utils::sq120to64[toSq];
+        
+        pawns[colour].clearBit(fromSq64);
+        pawns[SIDE::BOTH].clearBit(fromSq64);
+        
+        pawns[colour].setBit(toSq64);
+        pawns[SIDE::BOTH].setBit(toSq64);
+    }
+    
+    bool movedPiece = false;
+    for (int i = 0; i < pieceNums[piece]; ++i) {
+        if (pieceList[piece][i] == fromSq) {
+            pieceList[piece][i] = toSq;
+            movedPiece = true;
+        }
+    }
+    assert(movedPiece);
+}
+
+bool Board::makeMove(const int move) {
+    assert(check());
+    
+    int fromSq = Utils::getFromSq(move);
+    int toSq = Utils::getToSq(move);
+    int prevSide = side;
+    
+    assert(Utils::isSqOnBoard(fromSq));
+    assert(Utils::isSqOnBoard(toSq));
+    assert(Utils::isValidSide (side));
+    assert(Utils::isValidPiece(pieces[fromSq]));
+    
+    history[histPly].posKey = posKey;
+    
+    if (move & FLAG_EN_PASSANT) {
+        if (side == SIDE::WHITE) {
+            clearPiece(toSq - 10);
+        } else if (side == SIDE::BLACK) {
+            clearPiece(toSq + 10);
+        } else {
+            assert(false);
+        }
+    } else if (move & FLAG_CASTLE) {
+        switch (toSq) {
+            case SQUARES::C1:
+                movePiece(SQUARES::A1, SQUARES::D1);
+                break;
+            case SQUARES::C8:
+                movePiece(SQUARES::A8, SQUARES::D8);
+                break;
+            case SQUARES::G1:
+                movePiece(SQUARES::H1, SQUARES::F1);
+                break;
+            case SQUARES::G8:
+                movePiece(SQUARES::H8, SQUARES::F8);
+                break;
+            default:
+                assert(false);
+                break;
+        }
+    }
+    
+    if (enPassant != SQUARES::NONE) {
+        hashEnPassant();
+    }
+    hashCastle();
+    
+    history[histPly].move = move;
+    history[histPly].fiftyMove = fiftyMove;
+    history[histPly].enPassant = enPassant;
+    history[histPly].castlePerm = castlePerm;
+    
+    castlePerm &= CASTLE_PERM[fromSq];
+    castlePerm &= CASTLE_PERM[toSq];
+    
+    enPassant = SQUARES::NONE;
+    
+    hashCastle();
+    
+    ++fiftyMove;
+    
+    int capture = Utils::getCapture(move);
+    if (capture != PIECES::EMPTY) {
+        assert(Utils::isValidPiece(capture));
+        clearPiece(toSq);
+        fiftyMove = 0;
+    }
+    
+    ++histPly;
+    ++ply;
+    
+    if (IS_PAWN[pieces[fromSq]]) {
+        fiftyMove = 0;
+        if (move & FLAG_PAWN_START) {
+            if (side == SIDE::WHITE) {
+                enPassant = fromSq + 10;
+                assert(Utils::ranksBoard[enPassant] == RANKS::RANK_3);
+            } else {
+                enPassant = fromSq - 10;
+                assert(Utils::ranksBoard[enPassant] == RANKS::RANK_6);
+            }
+            hashEnPassant();
+        }
+    }
+    
+    movePiece(fromSq, toSq);
+    
+    int promotion = Utils::getPromotion(move);
+    if (promotion != PIECES::EMPTY) {
+        assert(Utils::isValidPiece(promotion) && !IS_PAWN[promotion]);
+        clearPiece(toSq);
+        addPiece(toSq, promotion);
+    }
+    
+    if (IS_KING[pieces[toSq]]) {
+        kingSq[side] = toSq;
+    }
+    
+    side ^= 1;
+    hashSide();
+    
+    assert(check());
+    
+    if (isSqAttacked(kingSq[prevSide], side)) { // king can be captured
+        undoMove();
+        return false;
+    } else {
+        return true;
+    }
+}
+
+void Board::undoMove() {
+    assert(check());
+    
+    --histPly;
+    --ply;
+    
+    int move = history[histPly].move;
+    int fromSq = Utils::getFromSq(move);
+    int toSq = Utils::getToSq(move);
+    
+    assert(Utils::isSqOnBoard(fromSq));
+    assert(Utils::isSqOnBoard(toSq));
+    
+    if (enPassant != SQUARES::NONE) {
+        hashEnPassant();
+    }
+    hashCastle();
+    
+    castlePerm = history[histPly].castlePerm;
+    fiftyMove = history[histPly].fiftyMove;
+    enPassant = history[histPly].enPassant;
+    
+    if (enPassant != SQUARES::NONE) {
+        hashEnPassant();
+    }
+    hashCastle();
+    
+    side ^= 1;
+    hashSide();
+    
+    if (move & FLAG_EN_PASSANT) {
+        if (side == SIDE::WHITE) {
+            addPiece(toSq - 10, PIECES::BP);
+        } else {
+            addPiece(toSq + 10, PIECES::WP);
+        }
+    } else if (move & FLAG_CASTLE) {
+        switch (toSq) {
+            case SQUARES::C1:
+                movePiece(SQUARES::D1, SQUARES::A1);
+                break;
+            case SQUARES::C8:
+                movePiece(SQUARES::D8, SQUARES::A8);
+                break;
+            case SQUARES::G1:
+                movePiece(SQUARES::F1, SQUARES::H1);
+                break;
+            case SQUARES::G8:
+                movePiece(SQUARES::F8, SQUARES::H8);
+                break;
+            default:
+                assert(false);
+                break;
+        }
+    }
+    
+    movePiece(toSq, fromSq);
+    
+    if (IS_KING[pieces[fromSq]]) {
+        kingSq[side] = fromSq;
+    }
+    
+    int capture = Utils::getCapture(move);
+    if (capture != PIECES::EMPTY) {
+        assert(Utils::isValidPiece(capture));
+        addPiece(toSq, capture);
+    }
+    
+    int promotion = Utils::getPromotion(move);
+    int promotionColour = PIECE_COLOUR[promotion];
+    if (promotion != PIECES::EMPTY) {
+        assert(Utils::isValidPiece(promotion) && !IS_PAWN[promotion]);
+        clearPiece(fromSq);
+        
+        if (promotionColour == SIDE::WHITE) {
+            addPiece(fromSq, PIECES::WP);
+        } else if (promotionColour == SIDE::BLACK) {
+            addPiece(fromSq, PIECES::BP);
+        } else {
+            assert(false);
+        }
+    }
+    
+    assert(check());
+    assert(posKey == history[histPly].posKey);
 }
 
 bool Board::parseFen(const std::string& fen) {
@@ -435,8 +670,8 @@ bool Board::parseFen(const std::string& fen) {
 
             case '/':
             case ' ':
-                rank--;
                 file = FILE_A;
+                --rank;
                 ++i;
                 continue;              
 
@@ -492,8 +727,8 @@ bool Board::parseFen(const std::string& fen) {
     assert(castlePerm >= 0 && castlePerm <= 15);
 
     if (fen[i] != '-') {
-        file = fen[0] - 'a';
-        rank = fen[1] - '1';
+        file = fen[i] - 'a';
+        rank = fen[i + 1] - '1';
 
         assert(file >= FILES::FILE_A && file <= FILES::FILE_H);
         assert(file >= RANKS::RANK_1 && rank <= RANKS::RANK_8);
@@ -509,7 +744,7 @@ bool Board::parseFen(const std::string& fen) {
 
 bool Board::isSqAttacked(const int square, const int sideToCheck) {
     assert(Utils::isSqOnBoard(square));
-    assert(Utils::isSideValid(sideToCheck));
+    assert(Utils::isValidSide (sideToCheck));
     assert(check());
 
     if (sideToCheck == SIDE::WHITE) {
@@ -526,7 +761,7 @@ bool Board::isSqAttacked(const int square, const int sideToCheck) {
 
     for (int i = 0; i < KNIGHT_DIRECTIONS.size(); ++i) {
         int piece = pieces[square + KNIGHT_DIRECTIONS[i]];
-        if (IS_KNIGHT[piece] && PIECE_COLOUR[piece] == sideToCheck) {
+        if ((piece != SQUARES::OFFBOARD) && IS_KNIGHT[piece] && (PIECE_COLOUR[piece] == sideToCheck)) {
             return true;
         }
     }
@@ -535,10 +770,10 @@ bool Board::isSqAttacked(const int square, const int sideToCheck) {
         int dir = ROOK_DIRECTIONS[i];
         int attackSq = square + dir;
         int piece = pieces[attackSq];
-
+        
         while (piece != SQUARES::OFFBOARD) {
             if (piece != PIECES::EMPTY) {
-                if (IS_ROOK_QUEEN[piece] && PIECE_COLOUR[piece] == sideToCheck) {
+                if (IS_ROOK_QUEEN[piece] && (PIECE_COLOUR[piece] == sideToCheck)) {
                     return true;
                 }
                 break;
@@ -555,7 +790,7 @@ bool Board::isSqAttacked(const int square, const int sideToCheck) {
 
         while (piece != SQUARES::OFFBOARD) {
             if (piece != PIECES::EMPTY) {
-                if (IS_BISHOP_QUEEN[piece] && PIECE_COLOUR[piece] == sideToCheck) {
+                if (IS_BISHOP_QUEEN[piece] && (PIECE_COLOUR[piece] == sideToCheck)) {
                     return true;
                 }
                 break;
@@ -567,7 +802,7 @@ bool Board::isSqAttacked(const int square, const int sideToCheck) {
 
     for (int i = 0; i < KING_DIRECTIONS.size(); ++i) {
         int piece = pieces[square + KING_DIRECTIONS[i]];
-        if (IS_KING[piece] && PIECE_COLOUR[piece] == sideToCheck) {
+        if ((piece != SQUARES::OFFBOARD) && IS_KING[piece] && (PIECE_COLOUR[piece] == sideToCheck)) {
             return true;
         }
     }
@@ -591,7 +826,7 @@ void Board::reset() {
         material[i] = 0;
     }
 
-    for (int i = 0; i < 3; ++i) {
+    for (int i = 0; i < pawns.size(); ++i) {
         pawns[i].value = 0ULL;
     }
 

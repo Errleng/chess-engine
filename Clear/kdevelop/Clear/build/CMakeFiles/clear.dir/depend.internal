@@ -18,6 +18,15 @@ CMakeFiles/clear.dir/main.cpp.o
  /home/witness/Documents/Bitbucket/chessengine/Clear/kdevelop/Clear/board.h
  /home/witness/Documents/Bitbucket/chessengine/Clear/kdevelop/Clear/constants.h
  /home/witness/Documents/Bitbucket/chessengine/Clear/kdevelop/Clear/main.cpp
+ /home/witness/Documents/Bitbucket/chessengine/Clear/kdevelop/Clear/tester.h
+ /home/witness/Documents/Bitbucket/chessengine/Clear/kdevelop/Clear/types.h
+ /home/witness/Documents/Bitbucket/chessengine/Clear/kdevelop/Clear/utils.h
+CMakeFiles/clear.dir/tester.cpp.o
+ /home/witness/Documents/Bitbucket/chessengine/Clear/kdevelop/Clear/bitboard.h
+ /home/witness/Documents/Bitbucket/chessengine/Clear/kdevelop/Clear/board.h
+ /home/witness/Documents/Bitbucket/chessengine/Clear/kdevelop/Clear/constants.h
+ /home/witness/Documents/Bitbucket/chessengine/Clear/kdevelop/Clear/tester.cpp
+ /home/witness/Documents/Bitbucket/chessengine/Clear/kdevelop/Clear/tester.h
  /home/witness/Documents/Bitbucket/chessengine/Clear/kdevelop/Clear/types.h
  /home/witness/Documents/Bitbucket/chessengine/Clear/kdevelop/Clear/utils.h
 CMakeFiles/clear.dir/utils.cpp.o

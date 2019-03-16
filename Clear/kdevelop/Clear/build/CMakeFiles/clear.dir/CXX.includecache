@@ -10,10 +10,6 @@
 utils.h
 /home/witness/Documents/Bitbucket/chessengine/Clear/kdevelop/Clear/utils.h
 
-/home/witness/Documents/Bitbucket/chessengine/Clear/kdevelop/Clear/board.cpp
-board.h
-/home/witness/Documents/Bitbucket/chessengine/Clear/kdevelop/Clear/board.h
-
 /home/witness/Documents/Bitbucket/chessengine/Clear/kdevelop/Clear/board.h
 iostream
 -
@@ -31,8 +27,10 @@ array
 /home/witness/Documents/Bitbucket/chessengine/Clear/kdevelop/Clear/main.cpp
 iostream
 -
-utils.h
-/home/witness/Documents/Bitbucket/chessengine/Clear/kdevelop/Clear/utils.h
+tester.h
+/home/witness/Documents/Bitbucket/chessengine/Clear/kdevelop/Clear/tester.h
+
+/home/witness/Documents/Bitbucket/chessengine/Clear/kdevelop/Clear/tester.h
 board.h
 /home/witness/Documents/Bitbucket/chessengine/Clear/kdevelop/Clear/board.h
 

@@ -7,6 +7,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/witness/Documents/Bitbucket/chessengine/Clear/kdevelop/Clear/bitboard.cpp" "/home/witness/Documents/Bitbucket/chessengine/Clear/kdevelop/Clear/build/CMakeFiles/clear.dir/bitboard.cpp.o"
   "/home/witness/Documents/Bitbucket/chessengine/Clear/kdevelop/Clear/board.cpp" "/home/witness/Documents/Bitbucket/chessengine/Clear/kdevelop/Clear/build/CMakeFiles/clear.dir/board.cpp.o"
   "/home/witness/Documents/Bitbucket/chessengine/Clear/kdevelop/Clear/main.cpp" "/home/witness/Documents/Bitbucket/chessengine/Clear/kdevelop/Clear/build/CMakeFiles/clear.dir/main.cpp.o"
+  "/home/witness/Documents/Bitbucket/chessengine/Clear/kdevelop/Clear/tester.cpp" "/home/witness/Documents/Bitbucket/chessengine/Clear/kdevelop/Clear/build/CMakeFiles/clear.dir/tester.cpp.o"
   "/home/witness/Documents/Bitbucket/chessengine/Clear/kdevelop/Clear/utils.cpp" "/home/witness/Documents/Bitbucket/chessengine/Clear/kdevelop/Clear/build/CMakeFiles/clear.dir/utils.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")

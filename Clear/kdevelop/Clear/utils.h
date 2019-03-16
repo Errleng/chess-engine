@@ -1,6 +1,8 @@
 #ifndef UTILS_H
 #define UTILS_H
 
+// #define NDEBUG
+
 #include <random>
 #include <cassert>
 #include "constants.h"
@@ -21,9 +23,9 @@ namespace Utils
     extern std::uniform_int_distribution<unsigned long long> randDistr;
 
     extern bool isSqOnBoard(const int square);
-    extern bool isSideValid(const int side);
+    extern bool isValidSide (const int side);
     extern bool isFileOrRankValid(const int fileOrRank);
-    extern bool isPieceValid(const int piece);
+    extern bool isValidPiece(const int piece);
     extern bool isPieceValidOrEmpty(const int piece);
     extern int getFromSq(const int move);
     extern int getToSq(const int move);

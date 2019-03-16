@@ -2,7 +2,7 @@
 #include <iostream>
 
 bool Bitboard::isEmpty() {
-    return value != 0;
+    return value == 0;
 }
 
 void Bitboard::setBit(int square) {

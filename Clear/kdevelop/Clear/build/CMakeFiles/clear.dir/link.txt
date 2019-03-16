@@ -1,1 +1,1 @@
-/usr/bin/c++    -rdynamic CMakeFiles/clear.dir/bitboard.cpp.o CMakeFiles/clear.dir/board.cpp.o CMakeFiles/clear.dir/main.cpp.o CMakeFiles/clear.dir/utils.cpp.o  -o clear 
+/usr/bin/c++    -rdynamic CMakeFiles/clear.dir/bitboard.cpp.o CMakeFiles/clear.dir/board.cpp.o CMakeFiles/clear.dir/main.cpp.o CMakeFiles/clear.dir/tester.cpp.o CMakeFiles/clear.dir/utils.cpp.o  -o clear 

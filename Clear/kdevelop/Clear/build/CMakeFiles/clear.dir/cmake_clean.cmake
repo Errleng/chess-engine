@@ -2,6 +2,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/clear.dir/bitboard.cpp.o"
   "CMakeFiles/clear.dir/board.cpp.o"
   "CMakeFiles/clear.dir/main.cpp.o"
+  "CMakeFiles/clear.dir/tester.cpp.o"
   "CMakeFiles/clear.dir/utils.cpp.o"
   "clear.pdb"
   "clear"

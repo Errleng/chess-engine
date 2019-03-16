@@ -17,8 +17,17 @@ CMakeFiles/clear.dir/main.cpp.o: ../bitboard.h
 CMakeFiles/clear.dir/main.cpp.o: ../board.h
 CMakeFiles/clear.dir/main.cpp.o: ../constants.h
 CMakeFiles/clear.dir/main.cpp.o: ../main.cpp
+CMakeFiles/clear.dir/main.cpp.o: ../tester.h
 CMakeFiles/clear.dir/main.cpp.o: ../types.h
 CMakeFiles/clear.dir/main.cpp.o: ../utils.h
+
+CMakeFiles/clear.dir/tester.cpp.o: ../bitboard.h
+CMakeFiles/clear.dir/tester.cpp.o: ../board.h
+CMakeFiles/clear.dir/tester.cpp.o: ../constants.h
+CMakeFiles/clear.dir/tester.cpp.o: ../tester.cpp
+CMakeFiles/clear.dir/tester.cpp.o: ../tester.h
+CMakeFiles/clear.dir/tester.cpp.o: ../types.h
+CMakeFiles/clear.dir/tester.cpp.o: ../utils.h
 
 CMakeFiles/clear.dir/utils.cpp.o: ../constants.h
 CMakeFiles/clear.dir/utils.cpp.o: ../utils.cpp

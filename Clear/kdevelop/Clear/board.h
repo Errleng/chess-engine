@@ -32,9 +32,12 @@ public:
     MoveList moveList;
 
     unsigned long long genPosKey();
+    
     bool isSqAttacked(const int square, const int sideToCheck);
     bool check();
+    bool makeMove(const int move);
     bool parseFen(const std::string& fen);
+    
     void hashPiece(const int square, const int piece);
     void hashCastle();
     void hashSide();
@@ -44,9 +47,12 @@ public:
 //    void addCaptureMove(const int move, const MoveList& moveList);
 //    void addEnPassantMove(const int move, const MoveList& moveList);
 //    void addPawnCaptureMove(const int side, const int fromSq, const int toSq, const int capture, const MoveList& moveList);
-    void generateAllMoves();
+    void genAllMoves();
     void addPiece(const int square, const int piece);
+    void movePiece(const int fromSq, const int toSq);
     void clearPiece(const int square);
+    void undoMove();
+    
     void reset();
     void print();
 };

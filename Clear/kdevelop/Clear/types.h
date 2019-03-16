@@ -51,6 +51,10 @@ struct Move {
         }
         return stringRep;
     }
+    
+    void print() {
+        std::cout << str() << std::endl;
+    }
 };
 
 struct MoveList {
@@ -68,14 +72,24 @@ struct MoveList {
     }
 
     void addQuietMove(const int move) {
+        assert(Utils::isSqOnBoard(Utils::getFromSq(move)));
+        assert(Utils::isSqOnBoard(Utils::getToSq(move)));
+        
         addMove(move, 0);
     }
 
     void addCaptureMove(const int move) {
+        assert(Utils::isSqOnBoard(Utils::getFromSq(move)));
+        assert(Utils::isSqOnBoard(Utils::getToSq(move)));
+        assert(Utils::isValidPiece(Utils::getCapture(move)));
+        
         addMove(move, 0);
     }
 
     void addEnPassantMove(const int move) {
+        assert(Utils::isSqOnBoard(Utils::getFromSq(move)));
+        assert(Utils::isSqOnBoard(Utils::getToSq(move)));
+        
         addMove(move, 0);
     }
 

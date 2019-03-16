@@ -21,8 +21,12 @@ namespace Utils {
     bool isSqOnBoard(const int square) {
         return filesBoard[square] != SQUARES::OFFBOARD;
     }
+    
+    bool isSqValid(const int square) {
+        return (square != SQUARES::OFFBOARD) && (square != SQUARES::NONE);
+    }
 
-    bool isSideValid(const int side) {
+    bool isValidSide (const int side) {
         if (side == SIDE::WHITE || side == SIDE::BLACK) {
             return true;
         } else {
@@ -38,7 +42,7 @@ namespace Utils {
         }
     }
 
-    bool isPieceValid(const int piece) {
+    bool isValidPiece (const int piece) {
         if (piece >= PIECES::WP && piece <= PIECES::BK) {
             return true;
         } else {
