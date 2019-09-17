@@ -1,0 +1,7 @@
+D:/Code/SourceTree/ChessEngine/Clear/kdevelop/Clear/build-windows/CMakeFiles/clear.dir
+D:/Code/SourceTree/ChessEngine/Clear/kdevelop/Clear/build-windows/CMakeFiles/install/local.dir
+D:/Code/SourceTree/ChessEngine/Clear/kdevelop/Clear/build-windows/CMakeFiles/install.dir
+D:/Code/SourceTree/ChessEngine/Clear/kdevelop/Clear/build-windows/CMakeFiles/edit_cache.dir
+D:/Code/SourceTree/ChessEngine/Clear/kdevelop/Clear/build-windows/CMakeFiles/rebuild_cache.dir
+D:/Code/SourceTree/ChessEngine/Clear/kdevelop/Clear/build-windows/CMakeFiles/list_install_components.dir
+D:/Code/SourceTree/ChessEngine/Clear/kdevelop/Clear/build-windows/CMakeFiles/install/strip.dir

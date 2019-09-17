@@ -1,0 +1,22 @@
+[
+{
+  "directory": "D:/Code/SourceTree/ChessEngine/Clear/kdevelop/Clear/build-windows",
+  "command": "D:\\Applications\\MinGW-w64\\mingw64\\bin\\g++.exe      -o CMakeFiles\\clear.dir\\bitboard.cpp.obj -c D:\\Code\\SourceTree\\ChessEngine\\Clear\\kdevelop\\Clear\\bitboard.cpp",
+  "file": "D:/Code/SourceTree/ChessEngine/Clear/kdevelop/Clear/bitboard.cpp"
+},
+{
+  "directory": "D:/Code/SourceTree/ChessEngine/Clear/kdevelop/Clear/build-windows",
+  "command": "D:\\Applications\\MinGW-w64\\mingw64\\bin\\g++.exe      -o CMakeFiles\\clear.dir\\board.cpp.obj -c D:\\Code\\SourceTree\\ChessEngine\\Clear\\kdevelop\\Clear\\board.cpp",
+  "file": "D:/Code/SourceTree/ChessEngine/Clear/kdevelop/Clear/board.cpp"
+},
+{
+  "directory": "D:/Code/SourceTree/ChessEngine/Clear/kdevelop/Clear/build-windows",
+  "command": "D:\\Applications\\MinGW-w64\\mingw64\\bin\\g++.exe      -o CMakeFiles\\clear.dir\\main.cpp.obj -c D:\\Code\\SourceTree\\ChessEngine\\Clear\\kdevelop\\Clear\\main.cpp",
+  "file": "D:/Code/SourceTree/ChessEngine/Clear/kdevelop/Clear/main.cpp"
+},
+{
+  "directory": "D:/Code/SourceTree/ChessEngine/Clear/kdevelop/Clear/build-windows",
+  "command": "D:\\Applications\\MinGW-w64\\mingw64\\bin\\g++.exe      -o CMakeFiles\\clear.dir\\utils.cpp.obj -c D:\\Code\\SourceTree\\ChessEngine\\Clear\\kdevelop\\Clear\\utils.cpp",
+  "file": "D:/Code/SourceTree/ChessEngine/Clear/kdevelop/Clear/utils.cpp"
+}
+]
